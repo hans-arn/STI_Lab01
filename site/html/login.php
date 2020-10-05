@@ -1,8 +1,11 @@
 <?php
 include "config.php";
 
-if(isset($_GET['logout']))
+if(isset($_GET['logout'])){
     session_destroy();
+}
+if(isset($_SESSION["username"]))
+    header('Location: messages.php');
 if(isset($_POST['but_submit'])){
     $uname = $_POST['txt_uname'];
     $password = $_POST['txt_pwd'];
@@ -15,12 +18,10 @@ if(isset($_POST['but_submit'])){
             $row =$file_db->query("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
             $row = $row->fetch();
             if(isset($row['username'])){
-                $_SESSION["username"]=rand();
+                $_SESSION["username"]=$row['username'];
                 $_SESSION["isadmin"]=$row['isAdmin'];
-                print $row['username'] . "\t";
-                print  $row['isAdmin'] . "\t";
-            }else
-                echo "retry";
+                header('Location: messages.php');
+            }
 
         }
 
@@ -44,6 +45,7 @@ if(isset($_POST['but_submit'])){
             <div>
                 <input type="submit" value="Submit" name="but_submit" id="but_submit" />
             </div>
+            <input type="text" hidden="hidden"value="idjkhgshi">
         </div>
     </form>
 </div>
@@ -52,29 +54,3 @@ if(isset($_POST['but_submit'])){
 
 
 
-<?php
-include "config.php";
-
-if(isset($_POST['but_submit'])){
-
-    $uname = $_POST['txt_uname'];
-    $password = $_POST['txt_pwd'];
-
-    if ($uname != "" && $password != ""){
-
-        $sql_query = "select count(*) as cntUser from users where username='".$uname."' and password='".$password."'";
-        $result = mysqli_query($con,$sql_query);
-        $row = mysqli_fetch_array($result);
-
-        $count = $row['cntUser'];
-
-        if($count > 0){
-            $_SESSION['uname'] = $uname;
-            header('Location: home.php');
-        }else{
-            echo "Invalid username and password";
-        }
-
-    }
-
-}
