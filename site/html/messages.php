@@ -2,8 +2,10 @@
     include "header.php";
 
     if(isset($file_db)){
+        if(isset($_GET["del"]))
+            $file_db->exec("DELETE FROM message WHERE id=".$_GET['del']);
     if(isset($_SESSION["username"])){
-    $sql = "select message.id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
+    $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
 
     $result =$file_db->query($sql);
 
@@ -30,15 +32,19 @@ foreach  ($file_db->query($sql) as $row) {
 </td>
 <td>
     <?php $sql = "SELECT username FROM userSti WHERE id=". $row['sender'];
-    $row =$file_db->query($sql)->fetch();
-    if(isset($row['username']))
-        echo $row['username'];
+    $user =$file_db->query($sql)->fetch();
+    if(isset($user['username']))
+        echo $user['username'];
     else
         echo "compte supprime";
             ?>
 </td>
     <td>
-
+        <ul>
+            <li> <a href="messages.php?del=<?php echo $row['id']?>">Supprimer</a></li>
+            <li> <a href="message.php?id=<?php echo $row['id']?>">Ouvrir</a></li>
+            <li> <a href="writeMessage.php?id=<?php echo $row['sender']?>">Repondre</a></li>
+        </ul>
     </td>
 
 </tr>
