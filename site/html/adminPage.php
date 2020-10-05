@@ -41,7 +41,7 @@ include "headerAdmin.php";
 
             if(isset($result['id'])){
                 echo $result['id'];
-                header("Location: adminCheckUser.php?" . $result['id']);
+                header("Location: adminCheckUser.php?id=" . $result['id']);
             }else{
                 echo "not found";
             }
@@ -58,7 +58,7 @@ include "headerAdmin.php";
 
         foreach($result as $row){
             echo "Username : "?>
-                <a href='adminCheckUser.php?<?php echo $row["id"]?>'> <?php echo $row['username'] ?> </a><br/>
+                <a href='adminCheckUser.php?id=<?php echo $row["id"]?>'> <?php echo $row['username'] ?> </a><br/>
             <?php
         }
 
