@@ -9,6 +9,14 @@ else{
 }
 ?>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A Meaningful Page Title</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/tab.css">
+</head>
+<body>
 <ul>
     <li><a href="messages.php">messages</a></li>
     <li><a href="news.asp">News</a></li>
