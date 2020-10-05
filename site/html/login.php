@@ -1,8 +1,29 @@
-<!--
-the login page is inspired from the code given on this website :
-https://makitweb.com/create-simple-login-page-with-php-and-mysql/
--->
+<?php
+include "config.php";
 
+if(isset($_POST['but_submit'])){
+    $uname = $_POST['txt_uname'];
+    $password = $_POST['txt_pwd'];
+
+    if ($uname != "" && $password != ""){
+        if(isset($file_db)){
+            //print_r("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
+             //$result =$file_db->query("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
+            $row =$file_db->query("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
+            $row = $row->fetch();
+            if(isset($row['username'])){
+                print $row['username'] . "\t";
+                print  $row['isAdmin'] . "\t";
+            }else
+                echo "retry";
+
+        }
+
+
+    }
+
+}
+?>
 
 <link rel="stylesheet" href="style.css" />
 <div class="container">
