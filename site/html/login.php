@@ -49,8 +49,3 @@ if(isset($_POST['but_submit'])){
         </div>
     </form>
 </div>
-
-
-
-
-

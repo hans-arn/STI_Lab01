@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dca17ab-eebf-40b8-b36d-ac2646e051c8" name="Default Changelist" comment="" />
+    <list default="true" id="4dca17ab-eebf-40b8-b36d-ac2646e051c8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/html/headerAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/databases/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/databases/database.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/adminPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/html/adminPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/html/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../user.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../user.sql" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,7 +42,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1iRwlI70qlSNbMijfjuUevoPdUQ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -25,8 +54,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ownCloud/HEIG-VD/Semestre5/TWEB/Labos/Lab01/01-html-css-solution" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -38,20 +68,36 @@
       <option name="presentableId" value="Default" />
       <updated>1601883863066</updated>
       <workItem from="1601883864513" duration="2471000" />
+      <workItem from="1601898973493" duration="5642000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="1063" y="469" width="424" height="491" key="FileChooserDialogImpl" timestamp="1601884312677">
       <screen x="0" y="27" width="2560" height="1369" />
     </state>
     <state x="1063" y="469" width="424" height="491" key="FileChooserDialogImpl/0.27.2560.1369@0.27.2560.1369" timestamp="1601884312677" />
-    <state x="1075" y="637" width="399" height="156" key="NewPhpFileDialog" timestamp="1601885557605">
+    <state x="1075" y="637" width="399" height="156" key="NewPhpFileDialog" timestamp="1601900105069">
       <screen x="0" y="27" width="2560" height="1369" />
     </state>
-    <state x="1075" y="637" width="399" height="156" key="NewPhpFileDialog/0.27.2560.1369@0.27.2560.1369" timestamp="1601885557605" />
+    <state x="1075" y="637" width="399" height="156" key="NewPhpFileDialog/0.27.2560.1369@0.27.2560.1369" timestamp="1601900105069" />
+    <state x="944" y="331" key="run.anything.popup" timestamp="1601903376436">
+      <screen x="0" y="27" width="2560" height="1369" />
+    </state>
+    <state x="944" y="331" key="run.anything.popup/0.27.2560.1369@0.27.2560.1369" timestamp="1601903376436" />
   </component>
 </project>
