@@ -3,7 +3,7 @@
 
 // Set default timezone
 date_default_timezone_set('UTC');
-
+session_start();
 try{
     /**************************************
      * Create databases and                *
