@@ -1,6 +1,6 @@
 <?php
 include "config.php";
-
+echo hash('md5', 1234);
 if(isset($_GET['logout'])){
     session_destroy();
 }
@@ -8,7 +8,7 @@ if(isset($_SESSION["username"]))
     header('Location: messages.php');
 if(isset($_POST['but_submit'])){
     $uname = $_POST['txt_uname'];
-    $password = $_POST['txt_pwd'];
+    $password = hash('md5', $_POST['txt_pwd']);
 
     if ($uname != "" && $password != ""){
         if(isset($file_db)){
