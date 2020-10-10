@@ -45,7 +45,6 @@ if(isset($_POST['but_submit'])){
             <div>
                 <input type="submit" value="Submit" name="but_submit" id="but_submit" />
             </div>
-            <input type="text" hidden="hidden"value="idjkhgshi">
         </div>
     </form>
 </div>
