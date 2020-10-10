@@ -35,21 +35,33 @@ if(isset($file_db)){
     }
 
     if(isset($_POST['but_active'])){
-        $answer = $_POST['terms'];
-        if(!strcmp($answer, "yes")){
+        $answer_active = $_POST['isActive'];
+        if(!strcmp($answer_active, "yes")){
             $file_db->exec("update userSti set isActive = 1 where id = $userID");
-        }else if(!strcmp($answer, 'no')){
+        }else if(!strcmp($answer_active, 'no')){
             $file_db->exec("update userSti set isActive = 0 where id = $userID");
-
         }
-
     }
+
+    if(isset($_POST['but_admin'])){
+        $answer_admin = $_POST['isAdmin'];
+        if(!strcmp($answer_admin, "yes")){
+            $file_db->exec("update userSti set isAdmin = 1 where id = $userID");
+        }else if(!strcmp($answer_admin, 'no')){
+            $file_db->exec("update userSti set isAdmin = 0 where id = $userID");
+        }
+    }
+
 
     //    check if the account is active
     $isActive = $file_db->query("select isActive from userSti where $userID = id");
     $isActive = $isActive->fetch();
     $isActive = $isActive['isActive'];
 
+    //    check if the account is admin
+    $isAdmin = $file_db->query("select isAdmin from userSti where $userID = id");
+    $isAdmin = $isAdmin->fetch();
+    $isAdmin = $isAdmin['isAdmin'];
 }
 
 
@@ -78,25 +90,42 @@ if($reset_success){
 }
 ?>
 
-<!--Desactivate account-->
+<!--is Active or Admin-->
 <form action="" method="post">
     Active :
     <?php if($isActive){?>
         <label>
-            <input type="radio" name="terms" value="yes" checked="checked"> Yes
+            <input type="radio" name="isActive" value="yes" checked="checked"> Yes
         </label>
         <label>
-            <input type="radio" name="terms" value="no"> No
+            <input type="radio" name="isActive" value="no"> No
         </label>
     <?php } else{ ?>
         <label>
-            <input type="radio" name="terms" value="yes"> Yes
+            <input type="radio" name="isActive" value="yes"> Yes
         </label>
         <label>
-            <input type="radio" name="terms" value="no" checked="checked"> No
+            <input type="radio" name="isActive" value="no" checked="checked"> No
         </label>
     <?php } ?>
-    <input type="submit" name="but_active" value="Submit">
+    <input type="submit" name="but_active" value="Submit"><br>
+    Admin :
+    <?php if($isAdmin){?>
+        <label>
+            <input type="radio" name="isAdmin" value="yes" checked="checked"> Yes
+        </label>
+        <label>
+            <input type="radio" name="isAdmin" value="no"> No
+        </label>
+    <?php } else{ ?>
+        <label>
+            <input type="radio" name="isAdmin" value="yes"> Yes
+        </label>
+        <label>
+            <input type="radio" name="isAdmin" value="no" checked="checked"> No
+        </label>
+    <?php } ?>
+    <input type="submit" name="but_admin" value="Submit">
 </form>
 
 <!--Deleting account-->
