@@ -33,6 +33,8 @@ include "headerAdmin.php";
 </html>
 
 <?php
+if(isset($file_db)){
+
     if(isset($_POST['but_submit'])){
         $search = $_POST['txt_uname'];
         if($search != ""){
@@ -49,8 +51,6 @@ include "headerAdmin.php";
 
     }
 
-
-
     $listUsers = $_GET['listUsers'];
     if(isset($listUsers)){
 
@@ -63,5 +63,23 @@ include "headerAdmin.php";
         }
 
     }
+    if(isset($file_db)) {
+        if (isset($_POST['but_addAccount'])) {
+            header('Location: adminAddAccount.php');
+        }
+    }
+}
+?>
+<form method="post" action ="">
+    <div>
+        </br>
+        <input type="submit" name="but_addAccount" value="Add new account" id="but_addAccount">
+    </div>
+</form>
+
+
+<?php
+
+
 ?>
 
