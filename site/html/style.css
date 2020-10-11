@@ -3,6 +3,8 @@ the style.css is inspired from the code given on this website :
 https://makitweb.com/create-simple-login-page-with-php-and-mysql/
 */
 
+
+
 /* Container */
 .container{
     width:40%;
@@ -46,3 +48,5 @@ https://makitweb.com/create-simple-login-page-with-php-and-mysql/
     border: 0px;
     color: white;
 }
+
+
