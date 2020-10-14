@@ -12,16 +12,16 @@ if(isset($_POST['message']) && isset($_GET['id'])){
 }
 ?>
     <form method="post" action="">
-        <div id="div_message">
-            <h1>Login</h1>
+        <div id="div_message" class="container" align=center>
+            <h1>Message</h1>
             <div>
-                <input type="text" class="textbox" id="sujet" name="sujet" placeholder="sujet" />
+                <input type="text" class="form-control" id="sujet" name="sujet" placeholder="sujet" />
             </div>
             <div>
-                <input type="textbox" class="textbox" id="message" name="message" placeholder="message"/>
+                <textarea  class="form-control"  id="message" name="message" placeholder="message" rows="4"></textarea>
             </div>
             <div>
-                <input type="submit" value="Submit" name="but_submit" id="but_submit" />
+                <input type="submit" value="Submit" name="but_submit" id="but_submit"class="btn btn-primary col-6"/>
             </div>
         </div>
     </form>

@@ -18,9 +18,6 @@ if(!isset($_SESSION["username"])) {
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="messages.php">Messages</a></li>
-            <li class="nav-item"><a class="nav-link" href="news.asp">News</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.asp">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.asp">About</a></li>
             <?php if(isset($_SESSION['isadmin'])&&$_SESSION['isadmin']==1 ){?>
                 <li class="nav-item"><a class="nav-link"href="adminPage.php">Admin</a></li>
             <?php } ?>

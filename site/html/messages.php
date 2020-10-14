@@ -5,7 +5,7 @@ include "header.php";
             $file_db->exec("DELETE FROM message WHERE id=".$_GET['del']);
 
 ?>
-<a href="contact.php">Envoyer un message</a>
+
 <?php
 
             $areSomeMessage = $file_db->query( "select 1 FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."'")->fetchColumn();
@@ -13,11 +13,14 @@ include "header.php";
                 $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
                 $result =$file_db->query($sql);
 ?>
-<table style="width:100%">
+<div class="row justify-content-center">
+<div class="col-9 " >
+<a href="contact.php">Envoyer un message</a>
+<table class="table table-striped table-bordered"  >
     <tr>
-    <th>Date de reception</th>
-    <th>sujet</th>
-    <th>expediteur</th>
+    <th scope="col">Date de reception</th>
+    <th scope="col">sujet</th>
+    <th scope="col">expediteur</th>
         <th>actions</th>
     </tr>
 <?php
@@ -25,7 +28,7 @@ include "header.php";
                 foreach  ($rows as $row) {
 ?>
 
-<tr>
+<tr scope="row">
 
 <td>
     <?php echo $row['receiptDate']?>
@@ -60,4 +63,5 @@ include "header.php";
     }//db connector
 ?>
 </table>
-
+</div>
+</div>

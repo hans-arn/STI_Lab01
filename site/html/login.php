@@ -7,7 +7,6 @@ if(isset($_GET['logout'])){
 if(isset($_SESSION["username"]))
     header('Location: messages.php');
 if(isset($_POST['but_submit'])){
-    echo 'yoyoyo';
     $uname = $_POST['txt_uname'];
     $password = hash('md5', $_POST['txt_pwd']);
 

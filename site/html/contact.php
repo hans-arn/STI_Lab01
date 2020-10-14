@@ -6,12 +6,13 @@ include "header.php";
                 $sql .=" AND username LIKE '%".$_GET['query']."%'";
             }
             $sql .=";";
-            var_dump($sql);
             $result =$file_db->query($sql);
 
 
 
 ?>
+<div class="row justify-content-center">
+<div class="col-9 " align=center>
 <form method="get" action="">
         <div id="div_login">
             <h1>Login</h1>
@@ -31,4 +32,6 @@ include "header.php";
 
     <?php
             }
-    }
+    }?>
+</div>
+</div>
