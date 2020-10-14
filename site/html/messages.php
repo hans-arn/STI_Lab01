@@ -5,7 +5,9 @@ include "header.php";
             $file_db->exec("DELETE FROM message WHERE id=".$_GET['del']);
 
 ?>
-
+<div class="row justify-content-center">
+<div class="col-9 " >
+<a href="contact.php">Envoyer un message</a>
 <?php
 
             $areSomeMessage = $file_db->query( "select 1 FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."'")->fetchColumn();
@@ -13,9 +15,7 @@ include "header.php";
                 $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
                 $result =$file_db->query($sql);
 ?>
-<div class="row justify-content-center">
-<div class="col-9 " >
-<a href="contact.php">Envoyer un message</a>
+
 <table class="table table-striped table-bordered"  >
     <tr>
     <th scope="col">Date de reception</th>
