@@ -1,19 +1,10 @@
-Si vous utilisez l'image Docker proposée pour le cours, vous pouvez copier directement le repertoire "site" et son contenu (explications dans la donnée du projet).
+### Installation  
 
-Le repertoire "site" contient deux repertoires :
+Pour déployer l'application web exécuter le script `deploy-website.sh` 
 
-    - databases
-    - html
+La page de login pourra ensuite être atteinte avec l'adresse suivante : http://localhost:8080/login.php 
 
-Le repertoire "databases" contient :
+Il est possible de se loguer avec comme username `admin` et mdp `admin`. 
 
-    - database.sqlite : un fichier de base de données SQLite
-
-Le repertoire "html" contient :
-
-    - exemple.php : un fichier php qui réalise des opérations basiques SQLite sur le fichier contenu dans le repertoire databases
-    - helloworld.php : un simple fichier hello world pour vous assurer que votre container Docker fonctionne correctement
-    - phpliteadmin.php : une interface d'administration pour la base de données SQLite qui se trouve dans le repertoire databases
-
-Le mot de passe pour phpliteadmin est "admin".
+Pour supprimer le container exécuter le script `delete-container` 
 
