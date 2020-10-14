@@ -1,14 +1,17 @@
 <?php
-    include "header.php";
-
+include "header.php";
     if(isset($file_db)){
         if(isset($_GET["del"]))
             $file_db->exec("DELETE FROM message WHERE id=".$_GET['del']);
-    if(isset($_SESSION["username"])){
-    $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
 
-    $result =$file_db->query($sql);
+?>
+<a href="contact.php">Envoyer un message</a>
+<?php
 
+            $areSomeMessage = $file_db->query( "select 1 FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."'")->fetchColumn();
+            if($areSomeMessage){
+                $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
+                $result =$file_db->query($sql);
 ?>
 <table style="width:100%">
     <tr>
@@ -18,8 +21,8 @@
         <th>actions</th>
     </tr>
 <?php
-foreach  ($file_db->query($sql) as $row) {
-
+                $rows = $file_db->query($sql);
+                foreach  ($rows as $row) {
 ?>
 
 <tr>
@@ -49,9 +52,12 @@ foreach  ($file_db->query($sql) as $row) {
 
 </tr>
 <?php
-    }
-   }
-}
+                }//foreach
+            }//someRow
+            else {?>
+            <p>Vous n avez aucun message</p>
+            <?php }
+    }//db connector
 ?>
 </table>
 

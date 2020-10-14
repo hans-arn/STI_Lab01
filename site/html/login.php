@@ -16,10 +16,11 @@ if(isset($_POST['but_submit'])){
 
             //print_r("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
              //$result =$file_db->query("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
-            $row =$file_db->query("select username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
+            $row =$file_db->query("select id,username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
             $row = $row->fetch();
             if(isset($row['username'])){
                 $_SESSION["username"]=$row['username'];
+                $_SESSION["id"]=$row['id'];
                 $_SESSION["isadmin"]=$row['isAdmin'];
                 header('Location: messages.php');
             }
