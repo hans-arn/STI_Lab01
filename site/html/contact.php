@@ -14,8 +14,7 @@ include "header.php";
 <div class="row justify-content-center">
 <div class="col-9 " align=center>
 <form method="get" action="">
-        <div id="div_login">
-            <h1>Login</h1>
+            <h1>Envoyer un message a</h1>
             <div>
                 <input type="text" class="textbox" id="query" name="query" placeholder="Username" />
             </div>
@@ -23,7 +22,6 @@ include "header.php";
             <div>
                 <input type="submit" value="Submit"  />
             </div>
-        </div>
     </form>
 <?php
         foreach($result as $row){ ?>
