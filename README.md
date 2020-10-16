@@ -36,7 +36,7 @@ La page de login peut être atteinte à l'adresse suivante : http://localhost:80
 | -------- | -------- | ----- |
 | admin    | admin    | oui   |
 | alice    | alice    | non   |
-| bob      |          | non   |
+| bob      | bob      | non   |
 
 <img src="image/image-20201015114011314.png" alt="image-20201015114011314" style="zoom:67%;" />
 
@@ -56,7 +56,7 @@ Il est également possible de créer un nouveau compte utilisateur en cliquant s
 
 Pour envoyer un message cliquer sur le lien `envoyer un message`. 
 
-Il est ensuite possible de sélectionner un utilisateur dans la liste ou de rechercher directement le user  
+Il est ensuite possible de sélectionner un utilisateur dans la liste ou de rechercher directement l'utilisateur  
 
 
 

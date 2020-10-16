@@ -1,6 +1,7 @@
 <?php
 include "header.php";
     if(isset($file_db)){
+        // if a del param in the get method is detected remove the message
         if(isset($_GET["del"]))
             $file_db->exec("DELETE FROM message WHERE id=".$_GET['del']);
 
@@ -9,9 +10,10 @@ include "header.php";
 <div class="col-9 " >
 <a href="contact.php">Envoyer un message</a>
 <?php
-
+            //check if the user has messages
             $areSomeMessage = $file_db->query( "select 1 FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."'")->fetchColumn();
             if($areSomeMessage){
+                //select all messages
                 $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
                 $result =$file_db->query($sql);
 ?>
@@ -25,6 +27,7 @@ include "header.php";
     </tr>
 <?php
                 $rows = $file_db->query($sql);
+                //print all message
                 foreach  ($rows as $row) {
 ?>
 

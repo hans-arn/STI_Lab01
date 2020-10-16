@@ -1,7 +1,9 @@
 <?php
 include "header.php";
 if(isset($_POST['message']) && isset($_GET['id'])){
+    // set the timezone to UTC for compatibility with other app
     date_default_timezone_set('UTC');
+    //add message in the table
     $sql = "INSERT INTO message(receiptDate,sender,receiver,sujet,messageBody) VALUES ( '".date('Y-m-d H:i:s')."', ". $_SESSION["id"].", ". $_GET['id'];
     $sql .= ", '". $_POST["sujet"]."', '".$_POST['message']."');";
     if($file_db->exec($sql))
