@@ -14,12 +14,13 @@ if(isset($file_db)){
     $username = $username->fetch();
     $username = $username['username'];
 
+//    delete account from database
     if(isset($delAccount)){
         if($file_db->exec("delete from userSti where id = $delAccount")){
             header("Location: adminPage.php");
         }
     }
-
+//    change account password in databae
     if(isset($_POST['but_password'])){
         $uname = $_POST['txt_uname'];
         $password = $_POST['txt_pwd'];
@@ -33,7 +34,7 @@ if(isset($file_db)){
             }
         }
     }
-
+//    update account to active state when button presses
     if(isset($_POST['but_active'])){
         $answer_active = $_POST['isActive'];
         if(!strcmp($answer_active, "yes")){
@@ -42,7 +43,7 @@ if(isset($file_db)){
             $file_db->exec("update userSti set isActive = 0 where id = $userID");
         }
     }
-
+//    update account to admin state when button pressed
     if(isset($_POST['but_admin'])){
         $answer_admin = $_POST['isAdmin'];
         if(!strcmp($answer_admin, "yes")){
@@ -90,7 +91,7 @@ if($reset_success){
 }
 ?>
 
-<!--is Active or Admin-->
+<!--Possibility for the admin to change if an account is active or admin -->
 <form action="" method="post">
     Active :
     <?php if($isActive){?>

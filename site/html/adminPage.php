@@ -34,7 +34,7 @@ include "headerAdmin.php";
 
 <?php
 if(isset($file_db)){
-
+//    Search account by username
     if(isset($_POST['but_submit'])){
         $search = $_POST['txt_uname'];
         if($search != ""){
@@ -51,6 +51,7 @@ if(isset($file_db)){
 
     }
 
+//    List all users from database
     $listUsers = $_GET['listUsers'];
     if(isset($listUsers)){
 

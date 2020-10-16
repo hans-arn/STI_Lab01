@@ -32,6 +32,7 @@ include "headerAdmin.php";
 </body>
 </html>
 
+<!--Add new account to database -->
 <?php
 if(isset($file_db)){
     if(isset($_POST['but_submit'])){
