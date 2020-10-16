@@ -19,7 +19,7 @@ if(!isset($_SESSION["username"])) {
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="messages.php">Messages</a></li>
-            //add an access to the admin page is the user is an admin
+<!--            add an access to the admin page is the user is an admin-->
             <?php if(isset($_SESSION['isadmin'])&&$_SESSION['isadmin']==1 ){?>
                 <li class="nav-item"><a class="nav-link"href="adminPage.php">Admin</a></li>
             <?php } ?>
