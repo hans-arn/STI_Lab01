@@ -10,7 +10,6 @@ if(isset($_SESSION["username"]))
 
 if(isset($_POST['but_submit'])){
     $uname = $_POST['txt_uname'];
-    echo $_POST['txt_uname'];
     $password = hash('md5', $_POST['txt_pwd']);
 //connection if username and password are correct
     if ($uname != "" && $password != ""){

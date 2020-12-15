@@ -1,9 +1,4 @@
-<!--
-list all users
--->
-
 <?php
-include "config.php";
 include "headerAdmin.php";
 ?>
 

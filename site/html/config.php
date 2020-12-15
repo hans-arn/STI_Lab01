@@ -1,8 +1,8 @@
 <?php
     ob_start();
     session_start();
-// Set default timezone
-date_default_timezone_set('UTC');
+    // Set default timezone
+    date_default_timezone_set('UTC');
 try{
     /**************************************
      * Create databases and                *
