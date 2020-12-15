@@ -1,0 +1,23 @@
+version: '3'
+services:
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: webserver
+        volumes:
+            - "./site/html:/usr/share/nginx/html"
+            - "./nginx:/etc/nginx/conf.d/"
+        ports:
+            - "8080:8080"
+        depends_on:
+            - php
+# Php-fpm configuration
+    php:
+        image: php:7.2-fpm
+        restart: always
+        container_name: php
+        volumes:
+            - "./site/html:/script"
+        ports:
+            - 9000:9000

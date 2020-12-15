@@ -14,13 +14,15 @@ L'un des biens qui est vraiment sensible pour notre application est les données
 
 #### Le contenu des messages
 
-
+Les messages peuvent de nature assez sensible. Si on prend le contexte de l'application dans une entreprise, cela peut vite devenir délicat si des messages fuites. Des données sensibles sur des clients, l'infrastructure peut compromettre la réputation des services de l'entreprise voire même, occasionner des pertes financière. 
 
 ### Définir le périmètre de sécurisation
 
-## Identifier les sources de menaces
+Le périmètre de l'application est destiné à évolué dans contexte clos coupé de l'interaction d'internet. Cela vient principalement de la fonctionnalité assez simple de l'application qui permet à des employés de pouvoir discuter entre eux. Le fait que l'application ne soit pas en contact direct avec le `monde réel` réduis la probabilité d'attaque. 
 
 ## Identifier les scénarios d'attaques
+
+
 
 ### Éléments du système attaqué
 

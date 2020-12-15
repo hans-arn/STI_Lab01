@@ -7,8 +7,10 @@ if(isset($_GET['logout'])){
 //login info taken into variables and password hashed in md5
 if(isset($_SESSION["username"]))
     header('Location: messages.php');
+
 if(isset($_POST['but_submit'])){
     $uname = $_POST['txt_uname'];
+    echo $_POST['txt_uname'];
     $password = hash('md5', $_POST['txt_pwd']);
 //connection if username and password are correct
     if ($uname != "" && $password != ""){
@@ -19,7 +21,7 @@ if(isset($_POST['but_submit'])){
                 $_SESSION["username"]=$row['username'];
                 $_SESSION["id"]=$row['id'];
                 $_SESSION["isadmin"]=$row['isAdmin'];
-                header('Location: messages.php');
+                //header('Location: messages.php');
             }
 
         }

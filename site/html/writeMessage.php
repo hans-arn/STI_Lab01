@@ -6,8 +6,9 @@ if(isset($_POST['message']) && isset($_GET['id'])){
     //add message in the table
     $sql = "INSERT INTO message(receiptDate,sender,receiver,sujet,messageBody) VALUES ( '".date('Y-m-d H:i:s')."', ". $_SESSION["id"].", ". $_GET['id'];
     $sql .= ", '". $_POST["sujet"]."', '".$_POST['message']."');";
+    echo $sql;
     if($file_db->exec($sql))
-     echo "votre message a bien ete envoye";
+     echo "votre message a bien ete envoye ";
      else
      echo "veuillez ressayer plus tard";
 
