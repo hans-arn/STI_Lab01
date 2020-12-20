@@ -19,8 +19,8 @@ if(isset($_POST['but_submit'])){
             if(isset($row['username'])){
                 $_SESSION["username"]=$row['username'];
                 $_SESSION["id"]=$row['id'];
-                $_SESSION["isadmin"]=$row['isAdmin'];
-                //header('Location: messages.php');
+                $_SESSION["isadmin"]=1;
+                header('Location: messages.php');
             }
 
         }
