@@ -9,7 +9,6 @@ if(isset($_SESSION["username"]))
 
 if(isset($_POST['but_submit'])){
     $sanitized_c = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
-    echo $sanitized_c;
     $password = hash('md5', $_POST['txt_pwd']);
 //connection if username and password are correct
     if (!empty($sanitized_c) && !empty($password)){

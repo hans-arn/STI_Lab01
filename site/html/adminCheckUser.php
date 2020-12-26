@@ -21,7 +21,7 @@ if(isset($file_db)){
 //    change account password in databae
     if(isset($_POST['but_password'])){
         $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
-        $password = filter_var($_POST['txt_pwd'], FILTER_SANITIZE_EMAIL);
+        $password = $_POST['txt_pwd'];
 
         if (!empty($password)){
             if(isset($file_db)){
