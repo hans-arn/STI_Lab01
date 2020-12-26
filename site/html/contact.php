@@ -30,8 +30,6 @@ include "header.php";
         foreach($result as $row){ ?>
         //add a link to send message
         <p> <a href="writeMessage.php?id=<?php echo $row['id']?>"> envoyer un message</a>: <?php echo $row['username']?></p>
-
-
     <?php
             }
     }?>

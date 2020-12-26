@@ -20,21 +20,20 @@ if(isset($file_db)){
     }
 //    change account password in databae
     if(isset($_POST['but_password'])){
-        $uname = $_POST['txt_uname'];
-        $password = $_POST['txt_pwd'];
+        $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
+        $password = filter_var($_POST['txt_pwd'], FILTER_SANITIZE_EMAIL);
 
-        if ($password != ""){
+        if (!empty($password)){
             if(isset($file_db)){
                 $reset_success = 0;
-                if($file_db->exec("update userSti set password = '$password' where id = $userID")){
+                if($file_db->exec("update userSti set password = '$password' where id = $userID"))
                     $reset_success = 1;
-                }
             }
         }
     }
 //    update account to active state when button presses
     if(isset($_POST['but_active'])){
-        $answer_active = $_POST['isActive'];
+        $answer_active = filter_var($_POST['isActive'], FILTER_SANITIZE_STRING);
         if(!strcmp($answer_active, "yes")){
             $file_db->exec("update userSti set isActive = 1 where id = $userID");
         }else if(!strcmp($answer_active, 'no')){
@@ -43,14 +42,13 @@ if(isset($file_db)){
     }
 //    update account to admin state when button pressed
     if(isset($_POST['but_admin'])){
-        $answer_admin = $_POST['isAdmin'];
+        $answer_admin = filter_var($_POST['isAdmin'], FILTER_SANITIZE_STRING);
         if(!strcmp($answer_admin, "yes")){
             $file_db->exec("update userSti set isAdmin = 1 where id = $userID");
         }else if(!strcmp($answer_admin, 'no')){
             $file_db->exec("update userSti set isAdmin = 0 where id = $userID");
         }
     }
-
 
     //    check if the account is active
     $isActive = $file_db->query("select isActive from userSti where $userID = id");
@@ -62,10 +60,6 @@ if(isset($file_db)){
     $isAdmin = $isAdmin->fetch();
     $isAdmin = $isAdmin['isAdmin'];
 }
-
-
-
-
 
 ?>
 
@@ -84,9 +78,8 @@ Reset password
 </form>
 
 <?php
-if($reset_success){
+if($reset_success)
     echo "Password updated";
-}
 ?>
 
 <!--Possibility for the admin to change if an account is active or admin -->

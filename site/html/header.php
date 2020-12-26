@@ -1,10 +1,9 @@
 <?php
 include "config.php";
 //if the user is not connect redirect to the login page
-if(!isset($_SESSION["username"])) {
+if(!isset($_SESSION["username"]))
     header('Location: login.php');
-    exit();
-} ?>
+?>
 
 <!DOCTYPE html>
 <html lang="">

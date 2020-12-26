@@ -15,10 +15,9 @@ if(isset($file_db)){
         $sql = "SELECT username as receiver FROM userSti WHERE id=".$result['receiver'];
         $toCheck = $file_db->query($sql);
         $toCheck=$toCheck->fetch();
-        if($toCheck['receiver']!=$_SESSION['username']){
+        if($toCheck['receiver']!=$_SESSION['username'])
             header('Location: messages.php');
-            exit();
-        }
+
         $sql = "SELECT username as sender FROM userSti WHERE id=".$result['sender'];
         $sender = $file_db->query($sql);
         $sender=$sender->fetch();
