@@ -12,6 +12,7 @@ if(isset($file_db)){
         $query->execute(array($_GET['id']));
         $result = $query->fetch();
         //get the receiver username to check if the message was for him
+
         $receiverQuery =$file_db->prepare( "SELECT username as receiver FROM userSti WHERE id=?");
         $receiverQuery->execute(array($result['receiver']));
         $toCheck=$receiverQuery->fetch();
@@ -22,6 +23,7 @@ if(isset($file_db)){
         $senderQuery =$file_db->prepare( "SELECT username as receiver FROM userSti WHERE id=?");
         $senderQuery->execute(array($result['sender']));
         $sender=$senderQuery->fetch();
+
 
     }
         ?>

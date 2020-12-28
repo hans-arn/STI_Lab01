@@ -14,21 +14,22 @@ if(isset($file_db)){
 //    delete account from database
     if(isset($delAccount)){
         $delQuery = $file_db->prepare('delete from userSti where id = ?');
-        if($delQuery->execute([$userID])){
+        if($delQuery->execute([$userID]))
             header("Location: adminPage.php");
-        }
+
     }
 //    change account password in databae
     if(isset($_POST['but_password'])){
-        $uname = $_POST['txt_uname'];
+        $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
         $password = $_POST['txt_pwd'];
 
-        if ($password != ""){
+        if (!empty($password)){
             if(isset($file_db)){
                 $reset_success = 0;
                 $updatePassQuery = $file_db->prepare('update userSti set password = ?  where id = ?');
 
                 if($updatePassQuery->execute([ hash('md5',$password),$userID])){
+
                     $reset_success = 1;
                 }
             }
@@ -36,8 +37,9 @@ if(isset($file_db)){
     }
 //    update account to active state when button presses
     if(isset($_POST['but_active'])){
-        $answer_active = $_POST['isActive'];
+        $answer_active =filter_var($_POST['isActive'], FILTER_SANITIZE_STRING);
         $isActive=0;
+
         if(!strcmp($answer_active, "yes")){
             $isActive=1;
         }
@@ -46,8 +48,10 @@ if(isset($file_db)){
     }
 //    update account to admin state when button pressed
     if(isset($_POST['but_admin'])){
-        $answer_admin = $_POST['isAdmin'];
+
+        $answer_admin = filter_var($_POST['isAdmin'], FILTER_SANITIZE_STRING);
         $isAdmin=0;
+
         if(!strcmp($answer_admin, "yes")){
             $isAdmin=1;
         }
@@ -55,7 +59,6 @@ if(isset($file_db)){
         $changeActiveQuery = $file_db->prepare("update userSti set isAdmin = ? where id = ?");
         $changeActiveQuery->execute([$isAdmin,$userID]);
     }
-
 
     //    check if the account is active
     $isActiveQuery = $file_db->prepare("select isActive from userSti where id=?");
@@ -69,10 +72,6 @@ if(isset($file_db)){
     $isAdmin = $isAdminQuery->fetch();
     $isAdmin = $isAdmin['isAdmin'];
 }
-
-
-
-
 
 ?>
 
@@ -91,9 +90,8 @@ Reset password
 </form>
 
 <?php
-if($reset_success){
+if($reset_success)
     echo "Password updated";
-}
 ?>
 
 <!--Possibility for the admin to change if an account is active or admin -->
@@ -139,11 +137,6 @@ if($reset_success){
 <a href="adminCheckUser.php?id=<?php echo $userID?>&delete=<?php echo $userID?>"> Delete account </a>
 
 <?php
-if($delAccount){
+if($delAccount)
     echo "Account deleted";
-}
 ?>
-
-
-
-

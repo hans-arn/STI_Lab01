@@ -1,16 +1,17 @@
 <?php
 include "header.php";
-if(isset($_POST['message']) && isset($_GET['id'])){
+if(!empty($_POST['message']) && isset($_GET['id'])){
     // set the timezone to UTC for compatibility with other app
     date_default_timezone_set('UTC');
     //add message in the table
     $sql = "INSERT INTO message(receiptDate,sender,receiver,sujet,messageBody) VALUES ( '".date('Y-m-d H:i:s')."', ?, ?";
     $sql .= ", ?, ?);";
     $sendMessageQuery = $file_db->prepare($sql);
-    $params=[$_SESSION['id'],$_GET['id'],$_POST['sujet'],$_POST['message']];
+    $params=[$_SESSION['id'],$_GET['id'], filter_var($_POST['sujet'], FILTER_SANITIZE_STRING), filter_var($_POST['message'], FILTER_SANITIZE_STRING)];
     if($sendMessageQuery->execute($params))
+
      echo "votre message a bien ete envoye ";
-     else
+    else
      echo "veuillez ressayer plus tard";
 
 }

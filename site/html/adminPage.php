@@ -30,19 +30,20 @@ include "headerAdmin.php";
 <?php
 if(isset($file_db)){
 //    Search account by username
+
     if(isset($_POST['but_submit'])){
-        $search = $_POST['txt_uname'];
+        $search = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
         if($search != ""){
             $result = $file_db->prepare("select username, id from userSti where username like ?");
             $result->execute([$search]);
+
             $result = $result->fetch();
 
             if(isset($result['id'])){
                 echo $result['id'];
                 header("Location: adminCheckUser.php?id=" . $result['id']);
-            }else{
+            }else
                 echo "not found";
-            }
         }
 
     }
@@ -73,10 +74,3 @@ if(isset($file_db)){
         <input type="submit" name="but_addAccount" value="Add new account" id="but_addAccount">
     </div>
 </form>
-
-
-<?php
-
-
-?>
-

