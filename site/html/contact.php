@@ -3,13 +3,17 @@
 include "header.php";
     if(isset($file_db)){
     // print all other users
-            $sql= "SELECT id,username FROM userSti WHERE id !=".$_SESSION['id'];
-            if(isset($_GET['query'])){
-                //add a condition to print only username that match with the substring
-                $sql .=" AND username LIKE '%".$_GET['query']."%'";
-            }
-            $sql .=";";
-            $result =$file_db->query($sql);
+    $params[] = $_SESSION['id'];
+    $query = "SELECT id,username FROM userSti WHERE id != ?";
+        if(isset($_GET['query'])&&$_GET['query']!=""){
+            $params[]="%".$_GET['query']."%";
+            //add a condition to print only username that match with the substring
+            $query .=" AND username like ?";
+        }
+        $query .=";";
+        $result=$file_db->prepare($query);
+        $result->execute($params);
+        $result =$result->fetchAll();
 
 
 

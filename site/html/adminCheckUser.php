@@ -6,15 +6,15 @@ $userID = $_GET['id'];
 $delAccount = $_GET['delete'];
 
 if(isset($file_db)){
-
-    $sql_req = "select username from userSti where $userID = id";
-    $username = $file_db->query($sql_req);
-    $username = $username->fetch();
+    $get_name=$file_db->prepare("select username from userSti where  id= ? ");
+    $get_name->execute([$userID]);
+    $username = $get_name->fetch();
     $username = $username['username'];
 
 //    delete account from database
     if(isset($delAccount)){
-        if($file_db->exec("delete from userSti where id = $delAccount")){
+        $delQuery = $file_db->prepare('delete from userSti where id = ?');
+        if($delQuery->execute([$userID])){
             header("Location: adminPage.php");
         }
     }
@@ -26,7 +26,9 @@ if(isset($file_db)){
         if ($password != ""){
             if(isset($file_db)){
                 $reset_success = 0;
-                if($file_db->exec("update userSti set password = '$password' where id = $userID")){
+                $updatePassQuery = $file_db->prepare('update userSti set password = ?  where id = ?');
+
+                if($updatePassQuery->execute([ hash('md5',$password),$userID])){
                     $reset_success = 1;
                 }
             }
@@ -35,31 +37,36 @@ if(isset($file_db)){
 //    update account to active state when button presses
     if(isset($_POST['but_active'])){
         $answer_active = $_POST['isActive'];
+        $isActive=0;
         if(!strcmp($answer_active, "yes")){
-            $file_db->exec("update userSti set isActive = 1 where id = $userID");
-        }else if(!strcmp($answer_active, 'no')){
-            $file_db->exec("update userSti set isActive = 0 where id = $userID");
+            $isActive=1;
         }
+        $changeActiveQuery = $file_db->prepare("update userSti set isActive = ? where id = ?");
+        $changeActiveQuery->execute([$isActive,$userID]);
     }
 //    update account to admin state when button pressed
     if(isset($_POST['but_admin'])){
         $answer_admin = $_POST['isAdmin'];
+        $isAdmin=0;
         if(!strcmp($answer_admin, "yes")){
-            $file_db->exec("update userSti set isAdmin = 1 where id = $userID");
-        }else if(!strcmp($answer_admin, 'no')){
-            $file_db->exec("update userSti set isAdmin = 0 where id = $userID");
+            $isAdmin=1;
         }
+        var_dump($isAdmin);
+        $changeActiveQuery = $file_db->prepare("update userSti set isAdmin = ? where id = ?");
+        $changeActiveQuery->execute([$isAdmin,$userID]);
     }
 
 
     //    check if the account is active
-    $isActive = $file_db->query("select isActive from userSti where $userID = id");
-    $isActive = $isActive->fetch();
+    $isActiveQuery = $file_db->prepare("select isActive from userSti where id=?");
+    $isActiveQuery->execute([$userID]);
+    $isActive = $isActiveQuery->fetch();
     $isActive = $isActive['isActive'];
 
     //    check if the account is admin
-    $isAdmin = $file_db->query("select isAdmin from userSti where $userID = id");
-    $isAdmin = $isAdmin->fetch();
+    $isAdminQuery = $file_db->prepare("select isAdmin from userSti where id=?");
+    $isAdminQuery->execute([$userID]);
+    $isAdmin = $isAdminQuery->fetch();
     $isAdmin = $isAdmin['isAdmin'];
 }
 

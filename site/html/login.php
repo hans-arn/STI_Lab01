@@ -14,8 +14,9 @@ if(isset($_POST['but_submit'])){
 //connection if username and password are correct
     if ($uname != "" && $password != ""){
         if(isset($file_db)){
-           $row =$file_db->query("select id,username,isAdmin FROM userSti where username like '$uname' and password like '$password' and isActive=1");
-            $row = $row->fetch();
+        $query=$file_db->prepare("select id,username,isAdmin FROM userSti where username like ? and password like ? and isActive=1");
+            $query->execute(array($uname, $password));
+            $row = $query->fetch();
             if(isset($row['username'])){
                 $_SESSION["username"]=$row['username'];
                 $_SESSION["id"]=$row['id'];

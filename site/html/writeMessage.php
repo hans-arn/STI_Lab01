@@ -4,10 +4,11 @@ if(isset($_POST['message']) && isset($_GET['id'])){
     // set the timezone to UTC for compatibility with other app
     date_default_timezone_set('UTC');
     //add message in the table
-    $sql = "INSERT INTO message(receiptDate,sender,receiver,sujet,messageBody) VALUES ( '".date('Y-m-d H:i:s')."', ". $_SESSION["id"].", ". $_GET['id'];
-    $sql .= ", '". $_POST["sujet"]."', '".$_POST['message']."');";
-    echo $sql;
-    if($file_db->exec($sql))
+    $sql = "INSERT INTO message(receiptDate,sender,receiver,sujet,messageBody) VALUES ( '".date('Y-m-d H:i:s')."', ?, ?";
+    $sql .= ", ?, ?);";
+    $sendMessageQuery = $file_db->prepare($sql);
+    $params=[$_SESSION['id'],$_GET['id'],$_POST['sujet'],$_POST['message']];
+    if($sendMessageQuery->execute($params))
      echo "votre message a bien ete envoye ";
      else
      echo "veuillez ressayer plus tard";

@@ -2,20 +2,24 @@
 include "header.php";
     if(isset($file_db)){
         // if a del param in the get method is detected remove the message
-        if(isset($_GET["del"]))
-            $file_db->exec("DELETE FROM message WHERE id=".$_GET['del']);
-
+        if(isset($_GET["del"])&&$_GET["del"]!=""){
+            $deleteQuery =$file_db->prepare("DELETE FROM message WHERE id= ?");
+            $deleteQuery->execute([$_GET['del']]);
+        }
 ?>
 <div class="row justify-content-center">
 <div class="col-9 " >
 <a href="contact.php">Envoyer un message</a>
 <?php
             //check if the user has messages
-            $areSomeMessage = $file_db->query( "select 1 FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."'")->fetchColumn();
+            $someMessageQuery = $file_db->query( "select 1 FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username=?");
+            $someMessageQuery->execute([$_SESSION['username']]);
+            $areSomeMessage = $someMessageQuery->fetchColumn();
             if($areSomeMessage){
                 //select all messages
-                $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username='".$_SESSION['username']."' ORDER BY receiptDate desc";
-                $result =$file_db->query($sql);
+                $sql = "select message.id as id,receiptDate,sujet,username,sender FROM message INNER JOIN userSti ON userSti.id = message.receiver WHERE userSti.username= ? ORDER BY receiptDate desc";
+                $result=$file_db->prepare($sql);
+                $result->execute([$_SESSION['username']]);
 ?>
 
 <table class="table table-striped table-bordered"  >
@@ -26,7 +30,7 @@ include "header.php";
         <th>actions</th>
     </tr>
 <?php
-                $rows = $file_db->query($sql);
+                $rows = $result->fetchAll();
                 //print all message
                 foreach  ($rows as $row) {
 ?>
@@ -40,8 +44,12 @@ include "header.php";
     <?php echo $row['sujet']?>
 </td>
 <td>
-    <?php $sql = "SELECT username FROM userSti WHERE id=". $row['sender'];
-    $user =$file_db->query($sql)->fetch();
+    <?php
+
+    $sql = "SELECT username FROM userSti WHERE id= ? ";
+    $userQuery = $file_db->prepare($sql);
+    $userQuery->execute([$row['sender']]);
+    $user=$userQuery->fetch();
     if(isset($user['username']))
         echo $user['username'];
     else

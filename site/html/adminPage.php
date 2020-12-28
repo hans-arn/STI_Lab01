@@ -33,7 +33,8 @@ if(isset($file_db)){
     if(isset($_POST['but_submit'])){
         $search = $_POST['txt_uname'];
         if($search != ""){
-            $result = $file_db->query("select username, id from userSti where username like '$search'");
+            $result = $file_db->prepare("select username, id from userSti where username like ?");
+            $result->execute([$search]);
             $result = $result->fetch();
 
             if(isset($result['id'])){

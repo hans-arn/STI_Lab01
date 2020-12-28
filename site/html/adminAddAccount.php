@@ -38,7 +38,8 @@ if(isset($file_db)){
         $password = hash('md5', $_POST['password']);
         (strcmp($_POST['isActive'], 'yes')) ? $isActive=0 : $isActive=1;
         (strcmp($_POST['isAdmin'], 'yes')) ? $isAdmin=0 : $isAdmin=1;
-        if($file_db->exec("insert into userSti(username, password, isAdmin, isActive) values ('$uname','$password',$isActive,$isAdmin)")){
+        $insert = $file_db->prepare("insert into userSti(username, password, isAdmin, isActive) values (?,?,?,?)");
+        if($insert->execute(array($uname,$password,$isActive,$isAdmin))){
             header('Location: adminPage.php');
         }
 
