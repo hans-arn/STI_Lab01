@@ -64,15 +64,3 @@ Le deuxième problème vient du fait que le mot de passe par défaut, **admin**,
 ### PHP Version 5.5.9 
 
 La version php actuelle, qui est 5.5.9, est victime de plusieurs vulnérabilité sans exploit connu pour la plupart. Les possibilités les plus importantes sont le déni de service et l'exécution de code selon ce [site](https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&product_id=128&version_id=164957&page=1&hasexp=0&opdos=0&opec=0&opov=0&opcsrf=0&opgpriv=0&opsqli=0&opxss=0&opdirt=0&opmemc=0&ophttprs=0&opbyp=0&opfileinc=0&opginf=0&cvssscoremin=0&cvssscoremax=0&year=0&month=0&cweid=0&order=4&trc=101&sha=d8cb459be2a570e543cd95cce804c67332d729a8) 
-
-## Analyse de menace 
-
-## Correctif logiciel 
-
-### PhpLiteAdmin
-
-Nous avons ajouté un correctif avec la version de phpLiteAdmin 1.9.8.2 qui est la dernière version sortie. Nous avons aussi changer le mot de passe par défaut en **P@ssw0rd**. 
-
-### PHP Version et nginx 
-
-Nous avons remplacé la version de php par la version 7.4.13 qui ne souffre pour l'instant d'aucune vulnérabilité. Nous avons aussi profité de faire la mise à jour du serveur nginx même si la version ne souffrait d'aucune vulnérabilité connue.

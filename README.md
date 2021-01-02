@@ -4,27 +4,19 @@ Auteur : Gaëtan Daubresse, Quentin Saucy
 
 ### Installation  
 
-Pour déployer l'application web, exécutez le script [deploy-website.sh](./deploy-website.sh) 
+Pour démarrer l'application nous avons utilisé `docker-compose` ce changement est dû au fait que nous avons dû changé les images utilisées et nous en avons profiter pour mettre en place ce service. Cela facilite la gestion de l'application. 
 
-```bash
-#!/bin/bash 
+- Pour démarrer 
 
-docker run -ti -v "$PWD/site":/usr/share/nginx/ -d -p 8080:80 --name sti_lab01_daubresse_saucy --hostname sti arubinst/sti:project2018
+  ```sh
+  docker-compose up --build
+  ```
 
-docker exec -u root sti_lab01_daubresse_saucy service nginx start
+- Pour arrêter 
 
-docker exec -u root sti_lab01_daubresse_saucy service php5-fpm start
-```
-
-Pour supprimer le container, exécutez le script [delete-container.sh](./delete-container.sh)
-
-```bash
-#!/bin/bash 
-
-docker stop sti_lab01_daubresse_saucy
-
-docker rm sti_lab01_daubresse_saucy
-```
+  ```sh
+  docker-compose down
+  ```
 
 ### Utilisation 
 

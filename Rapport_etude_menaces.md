@@ -34,4 +34,12 @@ Le périmètre de l'application est destiné à évolué dans contexte clos coup
 
 ## Identifier les contre-mesures
 
+### PhpLiteAdmin
+
+Nous avons ajouté un correctif avec la version de phpLiteAdmin 1.9.8.2 qui est la dernière version sortie. Nous avons aussi changer le mot de passe par défaut en **P@ssw0rd**. 
+
+### PHP Version et nginx 
+
+Nous avons remplacé la version de php par la version 7.4.13 qui ne souffre pour l'instant d'aucune vulnérabilité. Nous avons aussi profité de faire la mise à jour du serveur nginx même si la version ne souffrait d'aucune vulnérabilité connue.
+
 ## conclusion
