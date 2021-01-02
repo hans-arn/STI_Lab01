@@ -1,5 +1,9 @@
 # Rapport étude de menaces
 
+## Introduction
+
+
+
 ## Décrire le système 
 
 ### Data Flow Diagram
@@ -14,11 +18,32 @@ L'un des biens qui est vraiment sensible pour notre application est les données
 
 #### Le contenu des messages
 
-Les messages peuvent de nature assez sensible. Si on prend le contexte de l'application dans une entreprise, cela peut vite devenir délicat si des messages fuites. Des données sensibles sur des clients, l'infrastructure peut compromettre la réputation des services de l'entreprise voire même, occasionner des pertes financière. 
+Les messages peuvent être de nature assez sensible. Si on prend le contexte de l'application dans une entreprise, cela peut vite devenir délicat si des messages fuites. Des données sensibles sur des clients, l'infrastructure peut compromettre la réputation des services de l'entreprise voire même, occasionner des pertes financière. 
 
 ### Définir le périmètre de sécurisation
 
 Le périmètre de l'application est destiné à évolué dans contexte clos coupé de l'interaction d'internet. Cela vient principalement de la fonctionnalité assez simple de l'application qui permet à des employés de pouvoir discuter entre eux. Le fait que l'application ne soit pas en contact direct avec le `monde réel` réduis la probabilité d'attaque. 
+
+## Sources de menaces
+
+- Hackers
+  - Motivation: gloire, financière, usage d'information pour mouvement latéraux
+  - Cible: Tous les éléments actifs permettant d'accéder et de gérer l'application
+  - Potentialité: Basse
+
+
+
+- Employé mécontent
+  - Motivation: revanche, financière
+  - Cible: tous éléments pouvant nuire à l'entreprise
+  - Potentialité: Haute
+
+
+
+- Concurrent
+  - Motivation: Vol de secret professionnel dans les messages des employés
+  - Cible: base de données des messages via un employé mécontent
+  - Potentialité: Moyenne
 
 ## Identifier les scénarios d'attaques
 
@@ -31,6 +56,20 @@ Le périmètre de l'application est destiné à évolué dans contexte clos coup
 ### Scénario d'attaque
 
 ### STRIDE
+
+| Composant de l'aplication | spoofing | Tampering | Repudiation | Information disclosure | Dos  | Elevation of privileges |
+| ------------------------- | -------- | --------- | ----------- | ---------------------- | ---- | ----------------------- |
+| Data Store                |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+|                           |          |           |             |                        |      |                         |
+
+
 
 ## Identifier les contre-mesures
 
