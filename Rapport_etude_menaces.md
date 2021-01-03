@@ -8,6 +8,8 @@
 
 ### Data Flow Diagram
 
+![](img/dfd.png)
+
 ### Identifier ses biens 
 
 Dans le monde d'aujourd'hui, une chose qui prend beaucoup de valeur, c'est les données. Dans une application comme celle-ci, qui pourrait gérer quelques dizaine d'utilisateurs. Si leurs données venaient à se faire voler, cela aurait des conséquences directes et indirects sur les développeurs. 
@@ -57,17 +59,18 @@ Le périmètre de l'application est destiné à évolué dans contexte clos coup
 
 ### STRIDE
 
-| Composant de l'aplication | spoofing | Tampering | Repudiation | Information disclosure | Dos  | Elevation of privileges |
-| ------------------------- | -------- | --------- | ----------- | ---------------------- | ---- | ----------------------- |
-| Data Store                |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
-|                           |          |           |             |                        |      |                         |
+| Composant de l’application    | spoofing | Tampering | Repudiation | Information disclosure | Dos  | Elevation of privileges |
+| ----------------------------- | -------- | --------- | ----------- | ---------------------- | ---- | ----------------------- |
+| Data Store - message          |          |           |             | oui                    |      |                         |
+| Data Store - userSti          |          |           |             | oui                    |      |                         |
+| login                         |          |           |             |                        |      | oui                     |
+| accueil utilisateur           |          |           |             |                        |      |                         |
+| accueil admin                 |          |           |             |                        |      |                         |
+| envoi d'un message            |          |           |             |                        |      |                         |
+| recherche utilisateur envoi   |          |           |             | oui                    |      |                         |
+| recherche utilisateur admin   |          |           |             | oui                    |      |                         |
+| lister utilisateur admin      |          |           |             |                        |      |                         |
+| ajouter un compte utilisateur |          |           |             |                        |      |                         |
 
 
 
