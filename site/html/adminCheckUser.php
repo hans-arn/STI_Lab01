@@ -28,8 +28,7 @@ if(isset($file_db)){
                 $reset_success = 0;
                 $updatePassQuery = $file_db->prepare('update userSti set password = ?  where id = ?');
 
-                if($updatePassQuery->execute([ hash('md5',$password),$userID])){
-
+                if($updatePassQuery->execute([ password_hash($password, PASSWORD_BCRYPT),$userID])){
                     $reset_success = 1;
                 }
             }

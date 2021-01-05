@@ -9,20 +9,16 @@ if(isset($_SESSION["username"]))
 
 if(isset($_POST['but_submit'])){
     $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
-    $password = hash('md5', $_POST['txt_pwd']);
     //connection if username and password are correct
-    if (!empty($uname) && !empty($password)){
-        if(isset($file_db)){
-
-            $query=$file_db->prepare("select id,username,isAdmin FROM userSti where username like ? and password like ? and isActive=1");
-            $query->execute(array($uname, $password));
-            $row = $query->fetch();
-
+    if (!empty($uname) && !empty($_POST['txt_pwd']) && isset($file_db)){
+        $query=$file_db->prepare("select * FROM userSti where username like ? and isActive=1");
+        $query->execute(array($uname));
+        $row = $query->fetch();
+        if(!empty($row) && password_verify($_POST['txt_pwd'], $row['password'])){
             $_SESSION["username"]=$row['username'];
             $_SESSION["id"]=$row['id'];
-            $_SESSION["isadmin"]=1;
+            $_SESSION["isadmin"]=$row['isAdmin'];
             header('Location: messages.php');
-
         }
     }
 }
@@ -40,8 +36,6 @@ if(isset($_POST['but_submit'])){
                 <input type="password" class="form-control" id="txt_uname" name="txt_pwd" placeholder="Password"/>
             </div>
             <div>
-<!--                <button class="btn btn-lg btn-primary btn-block" type="but_submit">Sign in</button>-->
-
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" name="but_submit" id="but_submit" />
             </div>
         </div>

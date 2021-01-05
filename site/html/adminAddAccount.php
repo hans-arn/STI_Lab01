@@ -35,13 +35,12 @@ include "headerAdmin.php";
 if(isset($file_db)){
     if(isset($_POST['but_submit'])){
         $uname = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
-        $password = hash('md5', $_POST['password']);
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         (strcmp($_POST['isActive'], 'yes')) ? $isActive=0 : $isActive=1;
         (strcmp($_POST['isAdmin'], 'yes')) ? $isAdmin=0 : $isAdmin=1;
         $insert = $file_db->prepare("insert into userSti(username, password, isAdmin, isActive) values (?,?,?,?)");
         if($insert->execute(array($uname,$password,$isActive,$isAdmin)))
             header('Location: adminPage.php');
-
     }
 }
 ?>
