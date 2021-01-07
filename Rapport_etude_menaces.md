@@ -2,7 +2,7 @@
 
 ## Introduction
 
-
+Dans le cadre de ce travail, une application de messagerie nous a été donné. Le but est de garder les même fonctionnalité ainsi que le même cahier des charges tout en améliorant la sécurité de l'infrastructure.
 
 ## Décrire le système 
 
@@ -85,11 +85,17 @@ $2y$10$kt0HoVATSWqcZo5cwWmnz.kuTsWUI5GxOf99AMAk4eGAcC9rnvDwS:admin
 
 ---
 
-### Éléments du système attaqué
+### Éléments du système attaqué 
+
+L'élément attaqué ici serait l'infrastructure php dans sa globalité.
 
 ### Motivation
 
+Mettre principalement l'application hors service pour les employés.
+
 ### Scénario d'attaque
+
+Si l'on se fie à ce [site](https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&product_id=128&version_id=164957&page=1&hasexp=0&opdos=0&opec=0&opov=0&opcsrf=0&opgpriv=0&opsqli=0&opxss=0&opdirt=0&opmemc=0&ophttprs=0&opbyp=0&opfileinc=0&opginf=0&cvssscoremin=0&cvssscoremax=0&year=0&cweid=0&order=1&trc=101&sha=d8cb459be2a570e543cd95cce804c67332d729a8) la version de php que nous avons actuellement est principalement vulnérable aux DDos et aux Dos, si on prend les scores CVSS les plus élevés. Cela implique que si un Hacker venait à avoir accès au réseau de l'entreprise, il pourrait effectuer une de ces attaques sur la messagerie. 
 
 ---
 
