@@ -20,6 +20,7 @@ if(isset($file_db)){
     }
 //    change account password in databae
     if(isset($_POST['but_password'])){
+        /*Correction: on nettoie l'entrée utilisateur*/
         $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
         $password = $_POST['txt_pwd'];
 
@@ -27,7 +28,7 @@ if(isset($file_db)){
             if(isset($file_db)){
                 $reset_success = 0;
                 $updatePassQuery = $file_db->prepare('update userSti set password = ?  where id = ?');
-
+                /*Correction: on hash le mot de passe avec Bcrypt*/
                 if($updatePassQuery->execute([ password_hash($password, PASSWORD_BCRYPT),$userID])){
                     $reset_success = 1;
                 }
@@ -36,6 +37,7 @@ if(isset($file_db)){
     }
 //    update account to active state when button presses
     if(isset($_POST['but_active'])){
+        /*Correction: on nettoie l'entrée utilisateur*/
         $answer_active =filter_var($_POST['isActive'], FILTER_SANITIZE_STRING);
         $isActive=0;
 
@@ -47,7 +49,7 @@ if(isset($file_db)){
     }
 //    update account to admin state when button pressed
     if(isset($_POST['but_admin'])){
-
+        /*Correction: on nettoie l'entrée utilisateur*/
         $answer_admin = filter_var($_POST['isAdmin'], FILTER_SANITIZE_STRING);
         $isAdmin=0;
 

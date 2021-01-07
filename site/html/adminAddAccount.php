@@ -34,7 +34,9 @@ include "headerAdmin.php";
 <?php
 if(isset($file_db)){
     if(isset($_POST['but_submit'])){
+        /*Correction: on nettoie l'entrée utilisateur */
         $uname = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
+        /*Correction: On hash le mot de passe avec Bcrypt */
         $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
         (strcmp($_POST['isActive'], 'yes')) ? $isActive=0 : $isActive=1;
         (strcmp($_POST['isAdmin'], 'yes')) ? $isAdmin=0 : $isAdmin=1;

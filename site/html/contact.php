@@ -14,9 +14,6 @@ include "header.php";
         $result=$file_db->prepare($query);
         $result->execute($params);
         $result =$result->fetchAll();
-
-
-
 ?>
 <div class="row justify-content-center">
 <div class="col-9 " align=center>

@@ -32,6 +32,7 @@ if(isset($file_db)){
 //    Search account by username
 
     if(isset($_POST['but_submit'])){
+        /*Correction: on nettoie l'entrée utilisateur*/
         $search = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
         if($search != ""){
             $result = $file_db->prepare("select username, id from userSti where username like ?");

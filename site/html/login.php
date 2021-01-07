@@ -8,12 +8,15 @@ if(isset($_SESSION["username"]))
     header('Location: messages.php');
 
 if(isset($_POST['but_submit'])){
+    /*Correction: l'entrée du nom d'utilisateur est nettoyée */
     $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
     //connection if username and password are correct
     if (!empty($uname) && !empty($_POST['txt_pwd']) && isset($file_db)){
+        /*Correction: la requête demande toutes les infos pour le nom d'utilisateur */
         $query=$file_db->prepare("select * FROM userSti where username like ? and isActive=1");
         $query->execute(array($uname));
         $row = $query->fetch();
+        /*Correction: et si le mot de passe correspond on peut s'identifier avec l'usage de BCrypt*/
         if(!empty($row) && password_verify($_POST['txt_pwd'], $row['password'])){
             $_SESSION["username"]=$row['username'];
             $_SESSION["id"]=$row['id'];

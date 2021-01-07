@@ -7,6 +7,7 @@ if(!empty($_POST['message']) && isset($_GET['id'])){
     $sql = "INSERT INTO message(receiptDate,sender,receiver,sujet,messageBody) VALUES ( '".date('Y-m-d H:i:s')."', ?, ?";
     $sql .= ", ?, ?);";
     $sendMessageQuery = $file_db->prepare($sql);
+    /*Correction: les entrées utilisateurs sont nettoyées*/
     $params=[$_SESSION['id'],$_GET['id'], filter_var($_POST['sujet'], FILTER_SANITIZE_STRING), filter_var($_POST['message'], FILTER_SANITIZE_STRING)];
     if($sendMessageQuery->execute($params))
 
