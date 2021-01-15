@@ -101,18 +101,28 @@ Si l'on se fie à ce [site](https://www.cvedetails.com/vulnerability-list.php?ve
 
 ### Éléments du système attaqué
 
+L'élément attaqué ici serait la qualité des mots de passe.
+
 ### Motivation
+
+Obtenir les mots de passe en clair pour pouvoir devenir administrateur du site et potentiellement administrateur du serveur.
 
 ### Scénario d'attaque
 
+Un attaquant trouve un accès priviligiés aux hashs des mots de passe par n'importe quel moyen. Dans cette attaque nous considérerons une attaque SQL. Une fois la liste des hashs de mots de passe obtenu en offline, il est possible de trouver des collisions dans le systèmes de hash MD5.
 ---
 
 ### Éléments du système attaqué
 
+L'élément attaqué ici serait les droits d'accès.
+
 ### Motivation
+
+Obtenir un accès privilégié sans droits d'accès administrateur.
 
 ### Scénario d'attaque
 
+Un attaquant utilise une injection sql permettant d'outrepassé le système de login.
 ---
 
 
@@ -143,5 +153,9 @@ Nous avons ajouté un correctif avec la version de phpLiteAdmin 1.9.8.2 qui est 
 ### PHP Version et nginx 
 
 Nous avons remplacé la version de php par la version 7.4.13 qui ne souffre pour l'instant d'aucune vulnérabilité. Nous avons aussi profité de faire la mise à jour du serveur nginx même si la version ne souffrait d'aucune vulnérabilité connue.
+
+### SQL injection
+
+Nous avons remplacé le système d'accès à la base de donnée par des requêtes SQL préparées et paramétrées.
 
 ## conclusion
