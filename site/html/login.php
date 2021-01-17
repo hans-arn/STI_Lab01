@@ -7,11 +7,19 @@ if(isset($_GET['logout']))
 if(isset($_SESSION["username"]))
     header('Location: messages.php');
 
+try {
+    if(!isset($_SESSION["token"])){
+        $_SESSION['token'] = bin2hex(random_bytes(32));
+    }
+} catch (Exception $e) {
+}
+
 if(isset($_POST['but_submit'])){
     /*Correction: l'entrée du nom d'utilisateur est nettoyée */
     $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
     //connection if username and password are correct
-    if (!empty($uname) && !empty($_POST['txt_pwd']) && isset($file_db)){
+    /*Correction: Token anti-CSRF*/
+    if (!empty($uname) && !empty($_POST['txt_pwd']) && isset($file_db) && hash_equals($_POST['token'],$_SESSION['token'])){
         /*Correction: la requête demande toutes les infos pour le nom d'utilisateur */
         $query=$file_db->prepare("select * FROM userSti where username like ? and isActive=1");
         $query->execute(array($uname));
@@ -35,8 +43,12 @@ if(isset($_POST['but_submit'])){
             <div>
                 <input type="text" class="form-control" id="txt_uname" name="txt_uname" placeholder="Username" />
             </div>
+            <!-- Correction: Token anti-CSRF -->
             <div>
                 <input type="password" class="form-control" id="txt_uname" name="txt_pwd" placeholder="Password"/>
+            </div>
+            <div>
+                <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
             </div>
             <div>
                 <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" name="but_submit" id="but_submit" />

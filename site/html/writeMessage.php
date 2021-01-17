@@ -1,6 +1,7 @@
 <?php
 include "header.php";
-if(!empty($_POST['message']) && isset($_GET['id'])){
+if(!empty($_POST['message']) && isset($_GET['id']) && hash_equals($_POST['token'],$_SESSION['token'])){
+    /*Correction: Token anti-CSRF*/
     // set the timezone to UTC for compatibility with other app
     date_default_timezone_set('UTC');
     //add message in the table
@@ -25,6 +26,10 @@ if(!empty($_POST['message']) && isset($_GET['id'])){
             </div>
             <div>
                 <textarea  class="form-control"  id="message" name="message" placeholder="message" rows="4"></textarea>
+            </div>
+            <!-- Correction: Token anti-CSRF -->
+            <div>
+                <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
             </div>
             <div>
                 <input type="submit" value="Submit" name="but_submit" id="but_submit"class="btn btn-primary col-6"/>

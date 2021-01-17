@@ -21,7 +21,10 @@ include "headerAdmin.php";
     <label for="password">Is admin:</label><br>
     <label> <input type="radio" name="isAdmin" value="yes"> Yes </label>
     <label> <input type="radio" name="isAdmin" value="no"> No </label>
-
+    <!-- Correction: Token anti-CSRF -->
+    <div>
+        <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
+    </div>
     <div>
         <input type="submit" value="Submit" name="but_submit" id="but_submit" />
     </div>
@@ -33,7 +36,8 @@ include "headerAdmin.php";
 <!--Add new account to database -->
 <?php
 if(isset($file_db)){
-    if(isset($_POST['but_submit'])){
+    /*Correction: Token anti-CSRF*/
+    if(isset($_POST['but_submit'])  && hash_equals($_POST['token'],$_SESSION['token'])){
         /*Correction: on nettoie l'entrée utilisateur */
         $uname = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
         /*Correction: On hash le mot de passe avec Bcrypt */

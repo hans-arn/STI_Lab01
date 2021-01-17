@@ -1,7 +1,6 @@
 <?php
 include 'headerAdmin.php';
 
-
 $userID = $_GET['id'];
 $delAccount = $_GET['delete'];
 
@@ -19,7 +18,8 @@ if(isset($file_db)){
 
     }
 //    change account password in databae
-    if(isset($_POST['but_password'])){
+    /*Correction: Token anti-CSRF*/
+    if(isset($_POST['but_password']) && hash_equals($_POST['token'],$_SESSION['token'])){
         /*Correction: on nettoie l'entrée utilisateur*/
         $uname = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
         $password = $_POST['txt_pwd'];
@@ -36,7 +36,8 @@ if(isset($file_db)){
         }
     }
 //    update account to active state when button presses
-    if(isset($_POST['but_active'])){
+    /*Correction: Token anti-CSRF*/
+    if(isset($_POST['but_active']) && hash_equals($_POST['token'],$_SESSION['token'])){
         /*Correction: on nettoie l'entrée utilisateur*/
         $answer_active =filter_var($_POST['isActive'], FILTER_SANITIZE_STRING);
         $isActive=0;
@@ -48,7 +49,8 @@ if(isset($file_db)){
         $changeActiveQuery->execute([$isActive,$userID]);
     }
 //    update account to admin state when button pressed
-    if(isset($_POST['but_admin'])){
+    /*Correction: Token anti-CSRF*/
+    if(isset($_POST['but_admin']) && hash_equals($_POST['token'],$_SESSION['token'])){
         /*Correction: on nettoie l'entrée utilisateur*/
         $answer_admin = filter_var($_POST['isAdmin'], FILTER_SANITIZE_STRING);
         $isAdmin=0;
@@ -84,7 +86,10 @@ Reset password
     <div>
         <input type="password" class="textbox" id="txt_uname" name="txt_pwd" placeholder="Password"/>
     </div>
-
+    <!-- Correction: Token anti-CSRF -->
+    <div>
+        <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
+    </div>
     <div>
         <input type="submit" value="Reset" name="but_password" id="but_password" />
     </div>
@@ -105,6 +110,7 @@ if($reset_success)
         <label>
             <input type="radio" name="isActive" value="no"> No
         </label>
+
     <?php } else{ ?>
         <label>
             <input type="radio" name="isActive" value="yes"> Yes
@@ -113,6 +119,10 @@ if($reset_success)
             <input type="radio" name="isActive" value="no" checked="checked"> No
         </label>
     <?php } ?>
+    <!-- Correction: Token anti-CSRF -->
+    <div>
+        <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
+    </div>
     <input type="submit" name="but_active" value="Submit"><br>
     Admin :
     <?php if($isAdmin){?>
@@ -130,6 +140,10 @@ if($reset_success)
             <input type="radio" name="isAdmin" value="no" checked="checked"> No
         </label>
     <?php } ?>
+    <!-- Correction: Token anti-CSRF -->
+    <div>
+        <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
+    </div>
     <input type="submit" name="but_admin" value="Submit">
 </form>
 

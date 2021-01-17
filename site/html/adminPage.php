@@ -7,21 +7,21 @@ include "headerAdmin.php";
 <body>
 
 <h1>Admin Page</h1>
-
     <form method="post" action="">
             <h3>Search user</h3>
             <div>
                 <input type="text" class="textbox" id="txt_uname" name="txt_uname" placeholder="Username" />
             </div>
-
+            <!-- Correction: Token anti-CSRF -->
+            <div>
+                <input type="hidden" class="form-control" id="txt_token"  name="token" value="<?=$_SESSION['token']?>"/>
+            </div>
             <div>
                 <input type="submit" value="Submit" name="but_submit" id="but_submit" />
             </div>
     </form>
-
 <ul>
     <li><a href="adminPage.php?listUsers"> List all users</a></li>
-
 </ul>
 
 </body>
@@ -30,11 +30,11 @@ include "headerAdmin.php";
 <?php
 if(isset($file_db)){
 //    Search account by username
-
     if(isset($_POST['but_submit'])){
         /*Correction: on nettoie l'entrée utilisateur*/
         $search = filter_var($_POST['txt_uname'], FILTER_SANITIZE_STRING);
-        if($search != ""){
+        /*Correction: Token anti-CSRF*/
+        if($search != "" && hash_equals($_POST['token'],$_SESSION['token'])){
             $result = $file_db->prepare("select username, id from userSti where username like ?");
             $result->execute([$search]);
 
@@ -52,7 +52,6 @@ if(isset($file_db)){
 //    List all users from database
     $listUsers = $_GET['listUsers'];
     if(isset($listUsers)){
-
         $result = $file_db->query("SELECT id, username FROM userSti");
 
         foreach($result as $row){

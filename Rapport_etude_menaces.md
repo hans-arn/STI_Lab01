@@ -110,6 +110,7 @@ Obtenir les mots de passe en clair pour pouvoir devenir administrateur du site e
 ### Scénario d'attaque
 
 Un attaquant trouve un accès priviligiés aux hashs des mots de passe par n'importe quel moyen. Dans cette attaque nous considérerons une attaque SQL. Une fois la liste des hashs de mots de passe obtenu en offline, il est possible de trouver des collisions dans le systèmes de hash MD5.
+
 ---
 
 ### Éléments du système attaqué
@@ -123,6 +124,25 @@ Obtenir un accès privilégié sans droits d'accès administrateur.
 ### Scénario d'attaque
 
 Un attaquant utilise une injection sql permettant d'outrepassé le système de login.
+
+---
+
+### Éléments du système attaqué 
+
+La trust Zone. 
+
+### Motivation
+
+Lister des informations auxquelles on a pas accès, se faire créer un utilisateur admin en usant de la crédulité d'un administrateur. 
+
+### Scénario d'attaque
+
+Afin de prouver notre scénario, nous avons pris le cas d'une CSRF qui afficherait l'utilisateur à qui on veut envoyer un message. Dans notre scénario l'administrateur, qui est déjà authentifié sur la messagerie, se laisse perturber par un mystérieux mail, lui disant que son grand-oncle qui vivait en Belgique vient  de décéder faisant de lui son unique héritier d'une fortune colossale. Le cabinet d'avocat qui lui a envoyé ce mail, lui indique de cliquer sur le lien présent pour prendre contact avec un de leur conseiller. Voici le lien [Cabinet d'avocat PWN&PWNED ](http://localhost:8080/contact.php?query=bob). Nous admettons volontiers que dans ce cas la CSRF n'est pas très dangereuse. 
+
+Mais on pourrait imaginer que ce lien fasse créer un utilisateur avec une requête POST. Vu la complexité d'une tel requête cela ne pourrait être l’œuvre que d'un Hacker.
+
+![](img/CSRF1.png)
+
 ---
 
 
@@ -135,12 +155,12 @@ Un attaquant utilise une injection sql permettant d'outrepassé le système de l
 | Data Store - userSti          |          |           |             | oui                    |      |                         |
 | login                         |          |           |             |                        |      | oui                     |
 | accueil utilisateur           |          |           |             |                        |      |                         |
-| accueil admin                 |          |           |             |                        |      |                         |
-| envoi d'un message            |          |           |             |                        |      |                         |
-| recherche utilisateur envoi   |          |           |             | oui                    |      |                         |
-| recherche utilisateur admin   |          |           |             | oui                    |      |                         |
-| lister utilisateur admin      |          |           |             |                        |      |                         |
-| ajouter un compte utilisateur |          |           |             |                        |      |                         |
+| accueil admin                 |          |           |             | oui                    |      |                         |
+| envoi d'un message            |          |           | oui         | oui                    |      |                         |
+| recherche utilisateur envoi   |          |           | oui         | oui                    |      |                         |
+| recherche utilisateur admin   |          |           | oui         | oui                    |      |                         |
+| lister utilisateur admin      |          |           | oui         | oui                    |      |                         |
+| ajouter un compte utilisateur |          |           | oui         |                        |      |                         |
 
 
 
@@ -157,5 +177,9 @@ Nous avons remplacé la version de php par la version 7.4.13 qui ne souffre pour
 ### SQL injection
 
 Nous avons remplacé le système d'accès à la base de donnée par des requêtes SQL préparées et paramétrées.
+
+### CSRF
+
+Nous avons rajouter des token anti-CSRF sur les requêtes GET et POST de l'application afin que l'on puisse vérifier que c'est uniquement l'utilisateur qui a fait la manipulation et non pas une requête forgée.
 
 ## conclusion
