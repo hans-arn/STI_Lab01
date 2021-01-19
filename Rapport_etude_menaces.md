@@ -180,6 +180,12 @@ Nous avons remplacé le système d'accès à la base de donnée par des requête
 
 ### CSRF
 
-Nous avons rajouter des token anti-CSRF sur les requêtes GET et POST de l'application afin que l'on puisse vérifier que c'est uniquement l'utilisateur qui a fait la manipulation et non pas une requête forgée.
+Nous avons rajouter des token anti-CSRF sur les requêtes GET et POST de l'application afin que l'on puisse vérifier que c'est uniquement l'utilisateur qui a fait la manipulation et non pas une requête forgée. Le but est de générer un seul Token de manière sûr pour la session et de vérifier à chaque envoi de formulaire que le token correspond. En parcourant les articles sur le sujet on peut constater que pour cela certaines communes se rejoignent.
 
-## conclusion
+- Générer un hash sûr et assez long, en général minimum 32 bits. 
+- Suivant la criticité des applications on peut générer un hash pour chaque nouvelle page
+- Vérifier les deux hash avec '==' ou `hash_equals()`  
+
+## Conclusion
+
+Notre application a améliorer sa sécurité de manière indiscutable au vu d'un certain type d'attaquant tel qu'un employé mécontent ou un Concurrent. Il est fort probable qu'un hacker expérimenté trouve des failles dans notre application. Néanmoins la pesée des intérêts permets de dire que le risque que cela arrive, donc qu'un attaquant pénètre dans le réseau et qu'il attaque nos biens nous paraît disproportionné face aux efforts qu'il faudrait faire pour devoir la partagé.
