@@ -49,6 +49,8 @@ Le périmètre de l'application est destiné à évolué dans contexte clos coup
 
 ## Identifier les scénarios d'attaques
 
+Pour chaque scénarios, nous avons fait un calcul des risques avec l'outil de l'[OWASP](https://www.security-net.biz/files/owaspriskcalc.html).  
+
 ---
 
 ### Éléments du système attaqué
@@ -67,6 +69,8 @@ cette attaque pourrait être fait par un hacker uniquement car elle nécessite d
 
 Si on se base sur ce [site](https://www.exploit-db.com/exploits/39714) on pourrait faire un MITM pour modifier les requêtes d'utilisateur authentifier sur la page d'administration. Mais ces attaques sont relativement complexe à mettre en œuvre dans le cadre de notre application.
 
+Score de risque : Probabilité **Medium** et un risque **High**
+
 ### Scénario d'attaque 2 
 
 Comme le mot de passe est celui par défaut il est facile pour n'importe quel attaquant potentiel de pouvoir entrer dans la page de gestion. Là ou ça devient plus compliquer c'est de savoir que cette page existe. Pour cela uniquement un hacker peut et veut effectuer cette action. Cela implique de volontairement la chercher à l'aide d'outil comme **DirBuster**, puis d'essayer de brute force la page de login. On voit qu'avec l'outil dirBuster on peut mapper seulement une partie du site, mais cela suffit pour pratiquer une attaque.
@@ -83,6 +87,8 @@ hashcat -a 0 -m 3200 --force ../hashes.txt Passwords/xato-net-10-million-passwor
 $2y$10$kt0HoVATSWqcZo5cwWmnz.kuTsWUI5GxOf99AMAk4eGAcC9rnvDwS:admin
 ```
 
+Score de risque : Probabilité **High** et un risque **High**
+
 ---
 
 ### Éléments du système attaqué 
@@ -97,6 +103,8 @@ Mettre principalement l'application hors service pour les employés.
 
 Si l'on se fie à ce [site](https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&product_id=128&version_id=164957&page=1&hasexp=0&opdos=0&opec=0&opov=0&opcsrf=0&opgpriv=0&opsqli=0&opxss=0&opdirt=0&opmemc=0&ophttprs=0&opbyp=0&opfileinc=0&opginf=0&cvssscoremin=0&cvssscoremax=0&year=0&cweid=0&order=1&trc=101&sha=d8cb459be2a570e543cd95cce804c67332d729a8) la version de php que nous avons actuellement est principalement vulnérable aux DDos et aux Dos, si on prend les scores CVSS les plus élevés. Cela implique que si un Hacker venait à avoir accès au réseau de l'entreprise, il pourrait effectuer une de ces attaques sur la messagerie. 
 
+Score de risque : Probabilité **Medium** et un risque **Medium**
+
 ---
 
 ### Éléments du système attaqué
@@ -110,6 +118,8 @@ Obtenir les mots de passe en clair pour pouvoir devenir administrateur du site e
 ### Scénario d'attaque
 
 Un attaquant trouve un accès priviligiés aux hashs des mots de passe par n'importe quel moyen. Dans cette attaque nous considérerons une attaque SQL. Une fois la liste des hashs de mots de passe obtenu en offline, il est possible de trouver des collisions dans le systèmes de hash MD5.
+
+Score de risque : Probabilité **Medium** et un risque **Medium**
 
 ---
 
@@ -142,6 +152,8 @@ Afin de prouver notre scénario, nous avons pris le cas d'une CSRF qui affichera
 Mais on pourrait imaginer que ce lien fasse créer un utilisateur avec une requête POST. Vu la complexité d'une tel requête cela ne pourrait être l’œuvre que d'un Hacker.
 
 ![](img/CSRF1.png)
+
+Score de risque : Probabilité **Medium** et un risque **Medium**
 
 ---
 
