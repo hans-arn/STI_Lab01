@@ -236,7 +236,7 @@ Score de risque : Probabilité **Medium** et un risque **Medium**
 | envoi d'un message            |          | oui       | oui         | oui                    |      |                         |
 | recherche utilisateur envoi   |          |           | oui         | oui                    |      |                         |
 | recherche utilisateur admin   |          |           | oui         | oui                    |      |                         |
-| lister utilisateur admin      |          | i         | oui         | oui                    |      |                         |
+| lister utilisateur admin      |          | oui         | oui         | oui                    |      |                         |
 | ajouter un compte utilisateur |          |           | oui         |                        |      |                         |
 
 
