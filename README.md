@@ -30,7 +30,7 @@ La page de login peut être atteinte à l'adresse suivante : http://localhost:80
 | alice    | alice    | non   |
 | bob      | bob      | non   |
 
-<img src="image/image-20201015114011314.png" alt="image-20201015114011314" style="zoom:67%;" />
+<img src="img/image-20201015114011314.png" alt="image-20201015114011314" style="zoom:67%;" />
 
 
 
@@ -42,7 +42,7 @@ Il est également possible de créer un nouveau compte utilisateur en cliquant s
 
 
 
-<img src="image/image-20201016172102977.png" alt="image-20201016172102977" style="zoom:67%;" />
+<img src="img/image-20201016172102977.png" alt="image-20201016172102977" style="zoom:67%;" />
 
 ##### Envois message 
 
@@ -52,5 +52,5 @@ Il est ensuite possible de sélectionner un utilisateur dans la liste ou de rech
 
 
 
-<img src="image/image-20201016172153096.png" alt="image-20201016172153096" style="zoom:67%;" />
+<img src="img/image-20201016172153096.png" alt="image-20201016172153096" style="zoom:67%;" />
 
