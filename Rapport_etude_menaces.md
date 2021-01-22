@@ -55,7 +55,7 @@ Pour chaque scénarios, nous avons fait un calcul des risques avec l'outil de l'
 
 ---
 
-### Éléments du système attaqué
+### Éléments du système attaqué Version phpLiteAdmin
 
 L'élément attaqué est la gestion de la base de donnée par la page phpLiteAdmin. 
 
@@ -65,7 +65,7 @@ Récupération des hashes (MD5 ou BCrypt) et des noms d'utilisateurs pour faire 
 
 Deux scénarios d'attaque sont possibles dans le cas de notre application.
 
-### Scénario d'attaque 1
+#### Scénario d'attaque 1
 
 Cette attaque pourrait être fait par un hacker uniquement, car elle nécessite des compétences et des connaissances que nous pourrait pas avoir le restes des attaquants potentiel. La version phpliteadmin, si on arrive à la savoir, contient des vulnérabilité CRSF, HTML et XSS. 
 
@@ -73,7 +73,7 @@ Si on se base sur ce [site](https://www.exploit-db.com/exploits/39714) on pourra
 
 Score de risque : Probabilité **Medium** et un risque **High**
 
-### Scénario d'attaque 2 
+#### Scénario d'attaque 2 
 
 Comme le mot de passe est celui par défaut, il est facile pour n'importe quel attaquant potentiel de pouvoir entrer dans la page de gestion. Là ou ça devient plus compliquer, c'est de savoir que cette page existe. Pour cela, uniquement un hacker peut et veut effectuer cette action. Cela implique de volontairement la chercher à l'aide d'outil comme **DirBuster**, puis d'essayer de brute force la page de login. On voit qu'avec l'outil dirBuster on peut mapper seulement une partie du site, mais cela suffit pour pratiquer une attaque.
 
@@ -93,15 +93,15 @@ Score de risque : Probabilité **High** et un risque **High**
 
 ---
 
-### Éléments du système attaqué 
+### Éléments du système attaqué : Version PHP et NGINX
 
 L'élément attaqué ici serait l'infrastructure php dans sa globalité.
 
-### Motivation
+#### Motivation
 
 Mettre principalement l'application hors service pour les employés.
 
-### Scénario d'attaque
+#### Scénario d'attaque
 
 Si l'on se fie à ce [site](https://www.cvedetails.com/vulnerability-list.php?vendor_id=74&product_id=128&version_id=164957&page=1&hasexp=0&opdos=0&opec=0&opov=0&opcsrf=0&opgpriv=0&opsqli=0&opxss=0&opdirt=0&opmemc=0&ophttprs=0&opbyp=0&opfileinc=0&opginf=0&cvssscoremin=0&cvssscoremax=0&year=0&cweid=0&order=1&trc=101&sha=d8cb459be2a570e543cd95cce804c67332d729a8) la version de php que nous avons actuellement est principalement vulnérable aux DDos et aux Dos, si on prend les scores CVSS les plus élevés. Cela implique que si un Hacker venait à avoir accès au réseau de l'entreprise, il pourrait effectuer une de ces attaques sur la messagerie. 
 
@@ -109,15 +109,15 @@ Score de risque : Probabilité **Medium** et un risque **Medium**
 
 ---
 
-### Éléments du système attaqué
+### Éléments du système attaqué : Robustesse Chiffrement des mots de passe 
 
 L'élément attaqué ici serait la qualité des mots de passe.
 
-### Motivation
+#### Motivation
 
 Obtenir les mots de passe en clair pour pouvoir devenir administrateur du site et potentiellement administrateur du serveur.
 
-### Scénario d'attaque
+#### Scénario d'attaque
 
 Un attaquant trouve un accès privilégié aux hash des mots de passe par n'importe quel moyen. Dans cette attaque, nous considérerons une attaque SQL. Une fois la liste des hash de mots de passe obtenu en offline, il est possible de trouver des collisions dans le système de hash MD5.
 
@@ -125,29 +125,29 @@ Score de risque : Probabilité **Medium** et un risque **Medium**
 
 ---
 
-### Éléments du système attaqué
+### Éléments du système attaqué : Élévation de privilèges 
 
 L'élément attaqué ici serait les droits d'accès.
 
-### Motivation
+#### Motivation
 
 Obtenir un accès privilégié sans droits d'accès administrateur.
 
-### Scénario d'attaque
+#### Scénario d'attaque
 
 Un attaquant utilise une injection sql permettant d'outrepassé le système de login.
 
 ---
 
-### Éléments du système attaqué 
+### Éléments du système attaqué : Social engineering
 
 La trust Zone. 
 
-### Motivation
+#### Motivation
 
 Lister des informations auxquelles on a pas accès, se faire créer un utilisateur admin en usant de la crédulité d'un administrateur. 
 
-### Scénario d'attaque
+#### Scénario d'attaque
 
 Afin de prouver notre scénario, nous avons pris le cas d'une CSRF qui afficherait l'utilisateur à qui on veut envoyer un message. Dans notre scénario, l'administrateur, qui est déjà authentifié sur la messagerie, se laisse perturber par un mystérieux mail, lui disant que son grand-oncle qui vivait en Belgique vient  de décéder faisant de lui son unique héritier d'une fortune colossale. Le cabinet d'avocat qui lui a envoyé ce mail, lui indique de cliquer sur le lien présent pour prendre contact avec un de leur conseiller. Voici le lien [Cabinet d'avocat PWN&PWNED ](http://localhost:8080/contact.php?query=bob). Nous admettons volontiers que dans ce cas la CSRF n'est pas très dangereuse. 
 
