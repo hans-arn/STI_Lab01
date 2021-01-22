@@ -1,8 +1,10 @@
 # Rapport étude de menaces
 
+> Quentin Saucy et Jérôme Arn
+
 ## Introduction
 
-Dans le cadre de ce travail, une application de messagerie nous a été donné. Le but est de garder les même fonctionnalité ainsi que le même cahier des charges tout en améliorant la sécurité de l'infrastructure.
+Dans le cadre de ce travail, une application de messagerie nous a été donné. Le but est de garder les mêmes fonctionnalités ainsi que le même cahier des charges tout en analysant les menaces et en comblant les failles de sécurité de l'infrastructure.
 
 ## Décrire le système 
 
@@ -12,26 +14,26 @@ Dans le cadre de ce travail, une application de messagerie nous a été donné. 
 
 ### Identifier ses biens 
 
-Dans le monde d'aujourd'hui, une chose qui prend beaucoup de valeur, c'est les données. Dans une application comme celle-ci, qui pourrait gérer quelques dizaine d'utilisateurs. Si leurs données venaient à se faire voler, cela aurait des conséquences directes et indirects sur les développeurs. 
+Dans le monde d'aujourd'hui, une chose qui prend beaucoup de valeur, c'est les données. Dans une application comme celle-ci, qui pourrait gérer quelques dizaines d'utilisateurs, voir des centaines. Si leurs données venaient à se faire voler, cela aurait des conséquences directes et indirectes sur l'entreprise.  
 
 #### Informations de login 
 
-L'un des biens qui est vraiment sensible pour notre application est les données de connexion  des utilisateurs et des administrateurs de l'application. Si un ou des utilisateurs utilisent le même pseudo et mot de passe pour plusieurs applications, ce qui est généralement le cas, cela permettrait à un attaquant de tenter des mouvements latéraux sur d'autres site où l'utilisateur a aussi un compte.
+L'un des biens qui est vraiment sensible pour notre application est les données de connexion des utilisateurs et des administrateurs de l'application. Si un ou des utilisateurs utilisent le même pseudo et mot de passe pour plusieurs applications, ce qui est généralement le cas, cela permettrait à un attaquant de tenter des mouvements latéraux sur d'autres sites où l'utilisateur a aussi un compte. De plus, si la politique de mot de passe de l'entreprise n'est pas assez sévère, un schéma de mot de passe pourrait se dessiner pour l'ensemble des employés. 
 
 #### Le contenu des messages
 
-Les messages peuvent être de nature assez sensible. Si on prend le contexte de l'application dans une entreprise, cela peut vite devenir délicat si des messages fuites. Des données sensibles sur des clients, l'infrastructure peut compromettre la réputation des services de l'entreprise voire même, occasionner des pertes financière. 
+Les messages peuvent être de nature assez sensible. Si on prend le contexte de l'application dans une entreprise, cela peut vite devenir délicat si des messages fuient. Des données sensibles sur des clients, l'infrastructure peut compromettre la réputation des services de l'entreprise voire même, occasionner des pertes financières. 
 
 ### Définir le périmètre de sécurisation
 
-Le périmètre de l'application est destiné à évolué dans contexte clos coupé de l'interaction d'internet. Cela vient principalement de la fonctionnalité assez simple de l'application qui permet à des employés de pouvoir discuter entre eux. Le fait que l'application ne soit pas en contact direct avec le `monde réel` réduis la probabilité d'attaque. 
+Le périmètre de l'application est destiné à évolué dans un contexte clos coupé de l'interaction d'Internet. Cela vient principalement de la fonctionnalité assez simple de l'application qui permet à des employés de pouvoir discuter entre eux. Le fait que l'application ne soit pas en contact direct avec le `monde réel` réduis la probabilité d'attaque. 
 
 ## Sources de menaces
 
 - Hackers
-  - Motivation: gloire, financière, usage d'information pour mouvement latéraux
-  - Cible: Tous les éléments actifs permettant d'accéder et de gérer l'application
-  - Potentialité: Basse
+  - Motivation : gloire, financière, usage d'information pour des mouvements latéraux
+  - Cible : Tous les éléments actifs permettant d'accéder et de gérer l'application
+  - Potentialité : Basse
 
 
 
@@ -59,28 +61,28 @@ L'élément attaqué est la gestion de la base de donnée par la page phpLiteAdm
 
 ### Motivation
 
-Récupération des hashes (MD5 ou BCrypt) et des noms d'utilisateurs pour faire des mouvements latéraux sur d'autre infrastructure de l'entreprise. Ajout d'utilisateur forgés administrateurs
+Récupération des hashes (MD5 ou BCrypt) et des noms d'utilisateurs pour faire des mouvements latéraux sur d'autres infrastructures de l'entreprise. Ajout forgé d'utilisateur avec des privilèges administrateurs
 
-Deux scénarios d'attaque sont possible dans le cas de notre application.
+Deux scénarios d'attaque sont possibles dans le cas de notre application.
 
 ### Scénario d'attaque 1
 
-cette attaque pourrait être fait par un hacker uniquement car elle nécessite des compétences et des connaissances que nous pourrait pas avoir le restes des attaquants potentiel. la version phpliteadmin, si on arrive à la savoir, contient des vulnérabilité CRSF, HTML et XSS. 
+Cette attaque pourrait être fait par un hacker uniquement, car elle nécessite des compétences et des connaissances que nous pourrait pas avoir le restes des attaquants potentiel. La version phpliteadmin, si on arrive à la savoir, contient des vulnérabilité CRSF, HTML et XSS. 
 
-Si on se base sur ce [site](https://www.exploit-db.com/exploits/39714) on pourrait faire un MITM pour modifier les requêtes d'utilisateur authentifier sur la page d'administration. Mais ces attaques sont relativement complexe à mettre en œuvre dans le cadre de notre application.
+Si on se base sur ce [site](https://www.exploit-db.com/exploits/39714) on pourrait faire un MITM pour modifier les requêtes d'utilisateur authentifié sur la page d'administration. Mais ces attaques sont relativement complexe à mettre en œuvre dans le cadre de notre application.
 
 Score de risque : Probabilité **Medium** et un risque **High**
 
 ### Scénario d'attaque 2 
 
-Comme le mot de passe est celui par défaut il est facile pour n'importe quel attaquant potentiel de pouvoir entrer dans la page de gestion. Là ou ça devient plus compliquer c'est de savoir que cette page existe. Pour cela uniquement un hacker peut et veut effectuer cette action. Cela implique de volontairement la chercher à l'aide d'outil comme **DirBuster**, puis d'essayer de brute force la page de login. On voit qu'avec l'outil dirBuster on peut mapper seulement une partie du site, mais cela suffit pour pratiquer une attaque.
+Comme le mot de passe est celui par défaut, il est facile pour n'importe quel attaquant potentiel de pouvoir entrer dans la page de gestion. Là ou ça devient plus compliquer, c'est de savoir que cette page existe. Pour cela, uniquement un hacker peut et veut effectuer cette action. Cela implique de volontairement la chercher à l'aide d'outil comme **DirBuster**, puis d'essayer de brute force la page de login. On voit qu'avec l'outil dirBuster on peut mapper seulement une partie du site, mais cela suffit pour pratiquer une attaque.
 
 ![](img/dirbuster.png)
 
  Une fois que nous sommes entré sur la page de gestion, nous pouvons :
 
 - Générer des utilisateurs administrateurs et ainsi pouvoir s'identifier
-- récupérer les identifiants des utilisateurs et appliquer **hashcat** ou **john the ripper** sur les Hash afin d'effectuer des mouvements latéraux ou s'identifier sur le site.  Comme on peut le voir ci-dessous les identifiants de l'administrateur ont sans peine été cassé par hashcat. 
+- récupérer les identifiants des utilisateurs et appliquer **hashcat** ou **john the ripper** sur les Hash afin d'effectuer des mouvements latéraux ou s'identifier sur le site.  Comme on peut le voir ci-dessous les identifiants administrateurs ont sans peine été cassé par hashcat. 
 
 ```sh
 hashcat -a 0 -m 3200 --force ../hashes.txt Passwords/xato-net-10-million-passwords-100000.txt
@@ -117,7 +119,7 @@ Obtenir les mots de passe en clair pour pouvoir devenir administrateur du site e
 
 ### Scénario d'attaque
 
-Un attaquant trouve un accès priviligiés aux hashs des mots de passe par n'importe quel moyen. Dans cette attaque nous considérerons une attaque SQL. Une fois la liste des hashs de mots de passe obtenu en offline, il est possible de trouver des collisions dans le systèmes de hash MD5.
+Un attaquant trouve un accès privilégié aux hash des mots de passe par n'importe quel moyen. Dans cette attaque, nous considérerons une attaque SQL. Une fois la liste des hash de mots de passe obtenu en offline, il est possible de trouver des collisions dans le système de hash MD5.
 
 Score de risque : Probabilité **Medium** et un risque **Medium**
 
@@ -147,9 +149,9 @@ Lister des informations auxquelles on a pas accès, se faire créer un utilisate
 
 ### Scénario d'attaque
 
-Afin de prouver notre scénario, nous avons pris le cas d'une CSRF qui afficherait l'utilisateur à qui on veut envoyer un message. Dans notre scénario l'administrateur, qui est déjà authentifié sur la messagerie, se laisse perturber par un mystérieux mail, lui disant que son grand-oncle qui vivait en Belgique vient  de décéder faisant de lui son unique héritier d'une fortune colossale. Le cabinet d'avocat qui lui a envoyé ce mail, lui indique de cliquer sur le lien présent pour prendre contact avec un de leur conseiller. Voici le lien [Cabinet d'avocat PWN&PWNED ](http://localhost:8080/contact.php?query=bob). Nous admettons volontiers que dans ce cas la CSRF n'est pas très dangereuse. 
+Afin de prouver notre scénario, nous avons pris le cas d'une CSRF qui afficherait l'utilisateur à qui on veut envoyer un message. Dans notre scénario, l'administrateur, qui est déjà authentifié sur la messagerie, se laisse perturber par un mystérieux mail, lui disant que son grand-oncle qui vivait en Belgique vient  de décéder faisant de lui son unique héritier d'une fortune colossale. Le cabinet d'avocat qui lui a envoyé ce mail, lui indique de cliquer sur le lien présent pour prendre contact avec un de leur conseiller. Voici le lien [Cabinet d'avocat PWN&PWNED ](http://localhost:8080/contact.php?query=bob). Nous admettons volontiers que dans ce cas la CSRF n'est pas très dangereuse. 
 
-Mais on pourrait imaginer que ce lien fasse créer un utilisateur avec une requête POST. Vu la complexité d'une tel requête cela ne pourrait être l’œuvre que d'un Hacker.
+Mais on pourrait imaginer que ce lien fasse créer un utilisateur avec une requête POST. Vu la complexité d'une telle requête, cela ne pourrait être l’œuvre que d'un Hacker.
 
 ![](img/CSRF1.png)
 
@@ -192,12 +194,12 @@ Nous avons remplacé le système d'accès à la base de donnée par des requête
 
 ### CSRF
 
-Nous avons rajouter des token anti-CSRF sur les requêtes GET et POST de l'application afin que l'on puisse vérifier que c'est uniquement l'utilisateur qui a fait la manipulation et non pas une requête forgée. Le but est de générer un seul Token de manière sûr pour la session et de vérifier à chaque envoi de formulaire que le token correspond. En parcourant les articles sur le sujet on peut constater que pour cela certaines communes se rejoignent.
+Nous avons rajouté des token anti-CSRF sur les requêtes GET et POST de l'application afin que l'on puisse vérifier que c'est uniquement l'utilisateur qui a fait la manipulation et non pas une requête forgée. Le but est de générer un seul Token de manière sûre pour la session et de vérifier à chaque envoi de formulaire que le token correspond. En parcourant les articles sur le sujet, on peut constater que pour cela certaines communes se rejoignent.
 
 - Générer un hash sûr et assez long, en général minimum 32 bits. 
-- Suivant la criticité des applications on peut générer un hash pour chaque nouvelle page
+- Suivant la criticité des applications, on peut générer un hash pour chaque nouvelle page
 - Vérifier les deux hash avec '==' ou `hash_equals()`  
 
 ## Conclusion
 
-Notre application a améliorer sa sécurité de manière indiscutable au vu d'un certain type d'attaquant tel qu'un employé mécontent ou un Concurrent. Il est fort probable qu'un hacker expérimenté trouve des failles dans notre application. Néanmoins la pesée des intérêts permets de dire que le risque que cela arrive, donc qu'un attaquant pénètre dans le réseau et qu'il attaque nos biens nous paraît disproportionné face aux efforts qu'il faudrait faire pour devoir la partagé.
+Notre application a amélioré sa sécurité de manière indiscutable au vu d'un certain type d'attaquant tel qu'un employé mécontent ou un Concurrent. Il est fort probable qu'un hacker expérimenté trouve des failles dans notre application. Néanmoins, la pesée des intérêts permet de dire que le risque que cela arrive, donc qu'un attaquant pénètre dans le réseau et qu'il attaque nos biens nous paraît disproportionné face aux efforts qu'il faudrait faire pour devoir l'a partagé.
